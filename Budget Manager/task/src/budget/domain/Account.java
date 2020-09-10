@@ -19,4 +19,8 @@ public class Account {
     public void addPurchase(final Purchase purchase) {
         history.add(purchase);
     }
+
+    public BigDecimal getBalance() {
+        return balance;
+    }
 }

@@ -13,7 +13,7 @@ public class Menu implements Runnable {
 
     private String title;
     private boolean once;
-    private String format = "%s) %s%s";
+    private String format = "%s) %s%n";
 
     public Menu(final String title) {
         this.title = String.format("%n%s%n", title);
