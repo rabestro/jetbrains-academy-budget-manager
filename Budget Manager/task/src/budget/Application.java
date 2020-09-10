@@ -3,7 +3,8 @@ package budget;
 import budget.domain.Account;
 import budget.domain.Purchase;
 import budget.ui.Menu;
-import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,7 +16,8 @@ import java.util.function.Consumer;
 import static java.util.Objects.isNull;
 
 public class Application implements Runnable {
-    private static final String DATABASE = "purchases.txt";
+    private static final File DATABASE = new File("purchases.txt");
+    private static final ObjectMapper MAPPER = new XmlMapper();
 
     private final Scanner scanner;
     private Account account;
@@ -43,7 +45,7 @@ public class Application implements Runnable {
 
     private void load() {
         try {
-            account = new JsonMapper().readValue(new File(DATABASE), Account.class);
+            account = MAPPER.readValue(DATABASE, Account.class);
             System.out.println("Purchases were loaded!");
         } catch (IOException e) {
             e.printStackTrace();
@@ -52,9 +54,7 @@ public class Application implements Runnable {
 
     private void save() {
         try {
-            new JsonMapper()
-                    .writerWithDefaultPrettyPrinter()
-                    .writeValue(new File(DATABASE), account);
+            MAPPER.writerWithDefaultPrettyPrinter().writeValue(DATABASE, account);
             System.out.println("Purchases were saved!");
         } catch (IOException e) {
             e.printStackTrace();
