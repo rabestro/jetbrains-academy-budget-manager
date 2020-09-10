@@ -19,6 +19,7 @@ public class Account {
     }
 
     public void addPurchase(final Purchase purchase) {
+        balance = balance.subtract(purchase.getPrice());
         history.add(purchase);
     }
 
