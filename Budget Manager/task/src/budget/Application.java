@@ -18,7 +18,7 @@ public class Application implements Runnable {
     private static final String DATABASE = "purchases.txt";
 
     private final Scanner scanner;
-    private final Account account;
+    private Account account;
 
     public Application(Account account) {
         scanner = new Scanner(System.in);
@@ -42,7 +42,12 @@ public class Application implements Runnable {
     }
 
     private void load() {
-
+        try {
+            account = new JsonMapper().readValue(new File(DATABASE), Account.class);
+            System.out.println("Purchases were loaded!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void save() {
@@ -50,6 +55,7 @@ public class Application implements Runnable {
             new JsonMapper()
                     .writerWithDefaultPrettyPrinter()
                     .writeValue(new File(DATABASE), account);
+            System.out.println("Purchases were saved!");
         } catch (IOException e) {
             e.printStackTrace();
         }
