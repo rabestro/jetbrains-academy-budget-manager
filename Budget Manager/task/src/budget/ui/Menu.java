@@ -19,7 +19,7 @@ public class Menu implements Runnable {
     private String format = "%s) %s%n";
 
     public Menu(final String title) {
-        this.title = String.format("%n%s%n", title);
+        this.title = title;
         bundle = null;
     }
 
@@ -58,6 +58,7 @@ public class Menu implements Runnable {
             System.out.println(title);
             map.forEach((key, entry) -> System.out.printf(format, key, entry));
             final var key = scanner.nextLine().toLowerCase();
+            System.out.println();
             map.getOrDefault(key, new Entry("Error", this::printErrorMessage)).run();
         } while (!once);
     }
