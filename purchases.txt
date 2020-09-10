@@ -1,0 +1,8 @@
+{
+  "history" : [ {
+    "category" : "FOOD",
+    "description" : "Almond 250g",
+    "price" : 35.43
+  } ],
+  "balance" : 964.57
+}

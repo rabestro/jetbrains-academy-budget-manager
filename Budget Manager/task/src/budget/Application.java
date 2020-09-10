@@ -3,7 +3,10 @@ package budget;
 import budget.domain.Account;
 import budget.domain.Purchase;
 import budget.ui.Menu;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 
+import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -12,6 +15,8 @@ import java.util.function.Consumer;
 import static java.util.Objects.isNull;
 
 public class Application implements Runnable {
+    private static final String DATABASE = "purchases.txt";
+
     private final Scanner scanner;
     private final Account account;
 
@@ -28,10 +33,26 @@ public class Application implements Runnable {
                 .add("Add purchase", getCategoryMenu(this::addPurchase, false))
                 .add("Show list of purchases", this::showPurchases)
                 .add("Balance", this::printBalance)
+                .add("Save", this::save)
+                .add("Load", this::load)
                 .addExit()
                 .run();
 
         System.out.println("Bye!");
+    }
+
+    private void load() {
+
+    }
+
+    private void save() {
+        try {
+            new JsonMapper()
+                    .writerWithDefaultPrettyPrinter()
+                    .writeValue(new File(DATABASE), account);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void addIncome() {
