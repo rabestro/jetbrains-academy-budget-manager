@@ -4,9 +4,13 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class Purchase {
-    private final Category category;
-    private final String description;
-    private final BigDecimal price;
+    private Category category;
+    private String description;
+    private BigDecimal price;
+
+    public Purchase() {
+
+    }
 
     public Purchase(
             final Category category,
@@ -32,6 +36,18 @@ public class Purchase {
     @Override
     public String toString() {
         return String.format("%s $%s", description, price);
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     public enum Category {

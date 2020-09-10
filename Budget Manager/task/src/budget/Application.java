@@ -3,7 +3,11 @@ package budget;
 import budget.domain.Account;
 import budget.domain.Purchase;
 import budget.ui.Menu;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
+import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -12,8 +16,11 @@ import java.util.function.Consumer;
 import static java.util.Objects.isNull;
 
 public class Application implements Runnable {
+    private static final File DATABASE = new File("purchases.txt");
+    private static final ObjectMapper MAPPER = new XmlMapper();
+
     private final Scanner scanner;
-    private final Account account;
+    private Account account;
 
     public Application(Account account) {
         scanner = new Scanner(System.in);
@@ -28,10 +35,30 @@ public class Application implements Runnable {
                 .add("Add purchase", getCategoryMenu(this::addPurchase, false))
                 .add("Show list of purchases", this::showPurchases)
                 .add("Balance", this::printBalance)
+                .add("Save", this::save)
+                .add("Load", this::load)
                 .addExit()
                 .run();
 
         System.out.println("Bye!");
+    }
+
+    private void load() {
+        try {
+            account = MAPPER.readValue(DATABASE, Account.class);
+            System.out.println("Purchases were loaded!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void save() {
+        try {
+            MAPPER.writerWithDefaultPrettyPrinter().writeValue(DATABASE, account);
+            System.out.println("Purchases were saved!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void addIncome() {

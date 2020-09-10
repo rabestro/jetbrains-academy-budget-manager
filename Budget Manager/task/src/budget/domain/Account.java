@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Account {
-    private final List<Purchase> history;
+    private List<Purchase> history;
     private BigDecimal balance;
 
     public Account() {
@@ -29,5 +29,13 @@ public class Account {
 
     public List<Purchase> getHistory() {
         return history;
+    }
+
+    public void setBalance(final BigDecimal balance) {
+        this.balance = balance;
+    }
+
+    public void setHistory(final List<Purchase> history) {
+        this.history = history;
     }
 }
