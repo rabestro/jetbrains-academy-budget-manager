@@ -1,7 +1,10 @@
 package budget.ui;
 
 import java.text.MessageFormat;
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.ResourceBundle;
+import java.util.Scanner;
 
 import static java.util.Objects.nonNull;
 
@@ -11,7 +14,7 @@ public class Menu implements Runnable {
     private final Map<String, Entry> map = new LinkedHashMap<>();
     private final ResourceBundle bundle;
 
-    private String title;
+    private final String title;
     private boolean once;
     private String format = "%s) %s%n";
 
