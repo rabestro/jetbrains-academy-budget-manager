@@ -135,14 +135,6 @@ public class Application implements Runnable {
         System.out.println("Purchase list is empty!");
     }
 
-    private void showPurchases() {
-        if (account.getHistory().size() == 0) {
-            printListEmpty();
-        } else {
-            getCategoryMenu(this::showPurchases, true).run();
-        }
-    }
-
     private Menu getCategoryMenu(final Consumer<Purchase.Category> action, final boolean isAll) {
         final var menu = new Menu("Choose the type of purchase");
         Arrays.stream(Purchase.Category.values())
@@ -152,6 +144,14 @@ public class Application implements Runnable {
         }
         menu.add("Back", menu::once);
         return menu;
+    }
+
+    private void showPurchases() {
+        if (account.getHistory().size() == 0) {
+            printListEmpty();
+        } else {
+            getCategoryMenu(this::showPurchases, true).run();
+        }
     }
 
     private void showPurchases(final Purchase.Category category) {
