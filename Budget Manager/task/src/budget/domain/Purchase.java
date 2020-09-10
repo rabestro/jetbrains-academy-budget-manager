@@ -24,4 +24,9 @@ public class Purchase {
     public String toString() {
         return String.format("%s $%s", description, price);
     }
+
+    public enum Category {
+        FOOD, CLOTHES, ENTERTAINMENT, OTHER
+    }
+
 }

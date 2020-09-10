@@ -5,6 +5,7 @@ import budget.domain.Purchase;
 import budget.ui.Menu;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Application implements Runnable {
@@ -18,10 +19,14 @@ public class Application implements Runnable {
 
     @Override
     public void run() {
+        final var menuAddPurchase = new Menu("Choose the type of purchase");
+        Arrays.stream(Purchase.Category.values())
+                .forEach(category -> menuAddPurchase.add(category.name(), () -> addPurchase(category)));
+        menuAddPurchase.add("Back", menuAddPurchase::once);
 
         new Menu("\nChoose your action:")
                 .add("Add income", this::addIncome)
-                .add("Add purchase", this::addPurchase)
+                .add("Add purchase", menuAddPurchase)
                 .add("Show list of purchases", this::showPurchases)
                 .add("Balance", this::printBalance)
                 .addExit()
@@ -39,7 +44,7 @@ public class Application implements Runnable {
         System.out.println("Balance: $" + account.getBalance());
     }
 
-    private void addPurchase() {
+    private void addPurchase(final Purchase.Category category) {
         System.out.println("Enter purchase name:");
         final var name = scanner.nextLine();
         System.out.println("Enter its price:");

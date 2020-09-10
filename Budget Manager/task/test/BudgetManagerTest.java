@@ -3,7 +3,6 @@ import org.hyperskill.hstest.stage.StageTest;
 import org.hyperskill.hstest.testcase.CheckResult;
 import org.hyperskill.hstest.testcase.TestCase;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.regex.Matcher;
@@ -36,11 +35,15 @@ public class BudgetManagerTest extends StageTest<String> {
                 .setCheckFunc(BudgetManagerTest::test4),
 
             new TestCase<String>()
-                .setInput("3\n1\n600\n2\nRed Fuji Apple\n5.99\n2\nEggs\n3.99\n3\n4\n0")
+                .setInput("1\n600\n2\n" +
+                    "1\nMilk\n3.5\n" +
+                    "2\nMen's Dual Defense Crew Socks 12 Pairs\n13\n" +
+                    "3\nCinema\n8.73\n" +
+                    "5\n3\n1\n2\n3\n5\n6\n0")
                 .setCheckFunc(BudgetManagerTest::test5)
+
         );
     }
-
 
     //Checking program stop
     private static CheckResult test1(String reply, String attach) {
@@ -101,6 +104,7 @@ public class BudgetManagerTest extends StageTest<String> {
         }
 
         return new CheckResult(true);
+
     }
 
 
@@ -123,7 +127,8 @@ public class BudgetManagerTest extends StageTest<String> {
                 "Balance is wrong after adding income!.\n" +
                     "Expected:\n" +
                     "Balance: $400.00\n" +
-                    "Your output:\n" + balanceAfterFirstAddingIncome);
+                    "Your output:\n" +
+                    balanceAfterFirstAddingIncome);
         }
 
         return new CheckResult(true);
@@ -135,59 +140,153 @@ public class BudgetManagerTest extends StageTest<String> {
 
         String[] blocks = reply.split("\n(\n+)?\n");
 
-        if (blocks.length != 14) {
+        if (blocks.length != 22) {
             return new CheckResult(false,
-                "Your program shows wrong blocks of output. Expected: 14\n" +
+                "Your program shows wrong blocks of output. Expected: 22\n" +
                     "You have: " + blocks.length + "\n" +
                     "Make sure that you print an empty line after each chosen action");
         }
 
-        String emptyPurchaseList = blocks[1];
 
-        if (!emptyPurchaseList.contains("empty")) {
+        //Food
+        String foodList = blocks[12];
+        if (!foodList.contains("Milk")) {
             return new CheckResult(false,
-                "Purchase list should be empty at the beginning!");
+                "Wrong food purchase list.\n" +
+                    "Expected:\n" +
+                    "Food:\n" +
+                    "Milk $3.50\n" +
+                    "Total sum: $3.50\n" +
+                    "Your output:\n" + foodList);
         }
 
-        String purchaseList = blocks[9];
-
-        String[][] purchases = {
-            {"Red Fuji Apple", "5.99"},
-            {"Eggs", "3.99"}
-        };
-
-        for (String[] purchase : purchases) {
-            if (!purchaseList.contains(purchase[0])) {
-                return new CheckResult(false,
-                    "Your purchase list doesn't contain \"" + purchase[0] + "\"");
-            }
-            if (!purchaseList.contains(purchase[1])) {
-                return new CheckResult(false,
-                    "Your purchase list doesn't have price of " + purchase[0]);
-            }
-        }
-
-        String balanceAfterAddingPurchases = blocks[11];
+        String[] temp = foodList.split("\n");
+        String totalSum = temp[temp.length - 1];
 
         Pattern doublePattern = Pattern.compile("\\d+[,.]\\d+");
-        Matcher matcher = doublePattern.matcher(balanceAfterAddingPurchases);
+        Matcher matcher = doublePattern.matcher(totalSum);
 
         if (!matcher.find()) {
             return new CheckResult(false,
-                "Your balance should contain a number!");
+                "Your food total sum is wrong!\n" +
+                    "Expected:\n" +
+                    "Total sum: $3.50\n" +
+                    "Your output:\n" +
+                    totalSum);
         }
 
-        double balance = Double.parseDouble(matcher.group());
+        double foodTotalSum = Double.parseDouble(matcher.group());
 
-        if (Math.abs(balance - 590.02) > 0.0001) {
+        if (Math.abs(foodTotalSum - 3.5) > 0.0001) {
             return new CheckResult(false,
-                "Your balance should change after adding purchase.\n" +
-                    "Expected: Balance $590.02\n" +
-                    "Your output: " + balanceAfterAddingPurchases);
+                "Your food total sum is wrong!");
         }
+
+        //Clothes
+        String clothesList = blocks[14];
+
+        if (!clothesList.contains("Men's Dual Defense Crew Socks 12 Pairs")) {
+            return new CheckResult(false,
+                "Wrong clothes purchase list.\nExpected:\n" +
+                    "Clothes:\n" +
+                    "Men's Dual Defense Crew Socks 12 Pairs $13.00\n" +
+                    "Total sum: $13.00\n" +
+                    "Your output:\n" + clothesList);
+        }
+
+        temp = clothesList.split("\n");
+        totalSum = temp[temp.length - 1];
+
+        matcher = doublePattern.matcher(totalSum);
+
+        if (!matcher.find()) {
+            return new CheckResult(false,
+                "Your clothes total sum is wrong!\n" +
+                    "Expected:\n" +
+                    "Total sum: $13.00\n" +
+                    "Your output:\n" +
+                    totalSum);
+        }
+
+        double clothesTotalSum = Double.parseDouble(matcher.group());
+
+        if (Math.abs(clothesTotalSum - 13) > 0.0001) {
+            return new CheckResult(false,
+                "Your clothes total sum is wrong!");
+        }
+
+        //Entertainment
+        String entertainmentList = blocks[16];
+
+        if (!entertainmentList.contains("Cinema")) {
+            return new CheckResult(false,
+                "Wrong entertainment purchase list.\nExpected:\n" +
+                    "Entertainment:\n" +
+                    "Cinema $8.73\n" +
+                    "Total sum: $8.73\n" +
+                    "Your output:\n" + entertainmentList);
+        }
+
+        temp = entertainmentList.split("\n");
+        totalSum = temp[temp.length - 1];
+
+        matcher = doublePattern.matcher(totalSum);
+
+        if (!matcher.find()) {
+            return new CheckResult(false,
+                "Your entertainment total sum is wrong!\n" +
+                    "Expected:\n" +
+                    "Total sum: $8.73\n" +
+                    "Your output:\n" +
+                    totalSum);
+        }
+
+        double entertainmentTotalSum = Double.parseDouble(matcher.group());
+
+        if (Math.abs(entertainmentTotalSum - 8.73) > 0.0001) {
+            return new CheckResult(false,
+                "Your entertainment total sum is wrong!");
+        }
+
+        //All
+        String allList = blocks[18];
+
+        if (!allList.contains("Milk")
+            || !allList.contains("Men's Dual Defense Crew Socks 12 Pairs")
+            || !allList.contains("Cinema")) {
+            return new CheckResult(false,
+                "Wrong all purchase list.\n" +
+                    "Expected:\n" +
+                    "All:\n" +
+                    "Milk $3.50\n" +
+                    "Men's Dual Defense Crew Socks 12 Pairs $13.00\n" +
+                    "Cinema $8.73\n" +
+                    "Total sum: $25.23" +
+                    "Your output:\n" + allList);
+        }
+
+        temp = allList.split("\n");
+        totalSum = temp[temp.length - 1];
+
+        matcher = doublePattern.matcher(totalSum);
+
+        if (!matcher.find()) {
+            return new CheckResult(false,
+                "Your all total sum is wrong!\n" +
+                    "Expected:\n" +
+                    "Total sum: $25.23\n" +
+                    "Your output:\n" +
+                    totalSum);
+        }
+
+        double allTotalSum = Double.parseDouble(matcher.group());
+
+        if (Math.abs(allTotalSum - 25.23) > 0.0001) {
+            return new CheckResult(false,
+                "Your all total sum is wrong!");
+        }
+
 
         return new CheckResult(true);
     }
-
-
 }
