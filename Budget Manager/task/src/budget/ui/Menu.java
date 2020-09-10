@@ -52,6 +52,10 @@ public class Menu implements Runnable {
         return add("0", "Exit", this::once);
     }
 
+    public Menu addExit(final String key, final String name) {
+        return add(key, name, this::once);
+    }
+
     @Override
     public void run() {
         do {
