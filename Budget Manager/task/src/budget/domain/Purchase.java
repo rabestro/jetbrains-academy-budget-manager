@@ -17,6 +17,10 @@ public class Purchase {
         this.price = price.setScale(2, RoundingMode.HALF_EVEN);
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
     public String getDescription() {
         return description;
     }

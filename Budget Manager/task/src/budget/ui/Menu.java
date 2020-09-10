@@ -55,6 +55,7 @@ public class Menu implements Runnable {
     @Override
     public void run() {
         do {
+            System.out.println();
             System.out.println(title);
             map.forEach((key, entry) -> System.out.printf(format, key, entry));
             final var key = scanner.nextLine().toLowerCase();

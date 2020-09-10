@@ -8,6 +8,8 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import static java.util.Objects.isNull;
+
 public class Application implements Runnable {
     private final Scanner scanner;
     private final Account account;
@@ -24,7 +26,7 @@ public class Application implements Runnable {
                 .forEach(category -> menuAddPurchase.add(category.name(), () -> addPurchase(category)));
         menuAddPurchase.add("Back", menuAddPurchase::once);
 
-        new Menu("\nChoose your action:")
+        new Menu("Choose your action:")
                 .add("Add income", this::addIncome)
                 .add("Add purchase", menuAddPurchase)
                 .add("Show list of purchases", this::showPurchases)
@@ -32,7 +34,7 @@ public class Application implements Runnable {
                 .addExit()
                 .run();
 
-        System.out.println("\nBye!");
+        System.out.println("Bye!");
     }
 
     private void addIncome() {
@@ -53,9 +55,30 @@ public class Application implements Runnable {
         System.out.println("Purchase was added!");
     }
 
+    private void printListEmpty() {
+        System.out.println("Purchase list is empty!");
+    }
+
     private void showPurchases() {
+        if (account.getHistory().size() == 0) {
+            printListEmpty();
+            return;
+        }
+        final var menu = new Menu("Choose the type of purchase");
+        Arrays.stream(Purchase.Category.values())
+                .forEach(category -> menu.add(category.name(), () -> showPurchases(category)));
+        menu.add("All", () -> showPurchases(null));
+        menu.add("Back", menu::once);
+        menu.run();
+    }
+
+    private void showPurchases(final Purchase.Category category) {
+        if (account.getHistory().size() > 0) {
+            System.out.println(isNull(category) ? "All" : category.name());
+        }
         account.getHistory()
                 .stream()
+                .filter(purchase -> isNull(category) || purchase.getCategory() == category)
                 .peek(System.out::println)
                 .map(Purchase::getPrice)
                 .reduce(BigDecimal::add)
