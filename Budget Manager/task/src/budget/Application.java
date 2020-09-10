@@ -49,7 +49,7 @@ public class Application implements Runnable {
         final var name = scanner.nextLine();
         System.out.println("Enter its price:");
         final var price = new BigDecimal(scanner.nextLine());
-        account.addPurchase(new Purchase(name, price));
+        account.addPurchase(new Purchase(category, name, price));
         System.out.println("Purchase was added!");
     }
 
