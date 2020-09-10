@@ -18,6 +18,7 @@ public class Application implements Runnable {
 
     @Override
     public void run() {
+
         new Menu("Choose your action:")
                 .add("Add income", this::addIncome)
                 .add("Add purchase", this::addPurchase)
@@ -25,6 +26,8 @@ public class Application implements Runnable {
                 .add("Balance", this::printBalance)
                 .addExit()
                 .run();
+
+        System.out.println("Bye!");
     }
 
     private void addIncome() {
