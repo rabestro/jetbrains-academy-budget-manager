@@ -1,8 +1,10 @@
-package budget.ui;
+package budget;
 
 import budget.domain.Account;
 import budget.domain.Purchase;
+import budget.ui.Menu;
 
+import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class Application implements Runnable {
@@ -19,7 +21,7 @@ public class Application implements Runnable {
         new Menu("Choose your action:")
                 .add("Add income", this::addIncome)
                 .add("Add purchase", this::addPurchase)
-                .add("Show list of purchases", this::addIncome)
+                .add("Show list of purchases", this::showPurchases)
                 .add("Balance", this::printBalance)
                 .addExit()
                 .run();
@@ -40,5 +42,17 @@ public class Application implements Runnable {
         System.out.println("Enter its price:");
         final var price = scanner.nextBigDecimal();
         account.addPurchase(new Purchase(name, price));
+        System.out.println("Purchase was added!");
+    }
+
+    private void showPurchases() {
+        account.getHistory()
+                .stream()
+                .peek(System.out::println)
+                .map(Purchase::getPrice)
+                .reduce(BigDecimal::add)
+                .ifPresentOrElse(
+                        total -> System.out.println("Total sum: $" + total),
+                        () -> System.out.println("Purchase list is empty"));
     }
 }

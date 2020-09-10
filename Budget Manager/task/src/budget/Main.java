@@ -1,9 +1,6 @@
 package budget;
 
 import budget.domain.Account;
-import budget.ui.Application;
-
-import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
