@@ -1,15 +1,14 @@
 package budget;
 
-import budget.ui.Menu;
+import budget.domain.Account;
+import budget.ui.Application;
 
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
 
-
-        new Menu("Choose your action:")
-                .add("Add income", System.out::println);
+        new Application(new Account()).run();
 
         final var total = new Scanner(System.in)
                 .useDelimiter("\\R")

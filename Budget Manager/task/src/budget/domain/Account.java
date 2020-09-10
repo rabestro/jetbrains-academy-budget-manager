@@ -7,9 +7,13 @@ public class Account {
     private BigDecimal balance;
     private final LinkedList<Purchase> history;
 
-    Account() {
+    public Account() {
         balance = BigDecimal.ZERO;
         history = new LinkedList<>();
+    }
+
+    public void addIncome(final BigDecimal income) {
+        balance = balance.add(income);
     }
 
     public void addPurchase(final Purchase purchase) {
