@@ -1,0 +1,90 @@
+<Account>
+  <history>
+    <history>
+      <category>FOOD</category>
+      <description>Almond 250g</description>
+      <price>35.43</price>
+    </history>
+    <history>
+      <category>FOOD</category>
+      <description>Milk</description>
+      <price>3.50</price>
+    </history>
+    <history>
+      <category>FOOD</category>
+      <description>Red Fuji Apple</description>
+      <price>5.99</price>
+    </history>
+    <history>
+      <category>FOOD</category>
+      <description>Eggs</description>
+      <price>3.99</price>
+    </history>
+    <history>
+      <category>FOOD</category>
+      <description>FIJI Natural Artesian Water</description>
+      <price>25.98</price>
+    </history>
+    <history>
+      <category>FOOD</category>
+      <description>Hershey's milk chocolate bars</description>
+      <price>8.54</price>
+    </history>
+    <history>
+      <category>FOOD</category>
+      <description>Great Value Broccoli Florets</description>
+      <price>1.00</price>
+    </history>
+    <history>
+      <category>FOOD</category>
+      <description>Keystone Ground Bee</description>
+      <price>6.28</price>
+    </history>
+    <history>
+      <category>CLOTHES</category>
+      <description>Gildan LT</description>
+      <price>8.61</price>
+    </history>
+    <history>
+      <category>CLOTHES</category>
+      <description>Men's Dual Defense Crew Socks 12 Pairs</description>
+      <price>13.00</price>
+    </history>
+    <history>
+      <category>CLOTHES</category>
+      <description>Wrangler Men's Stretch Cargo Pant</description>
+      <price>19.97</price>
+    </history>
+    <history>
+      <category>ENTERTAINMENT</category>
+      <description>LEGO DUPLO Town Farm Animals</description>
+      <price>10.10</price>
+    </history>
+    <history>
+      <category>ENTERTAINMENT</category>
+      <description>Cinema</description>
+      <price>8.73</price>
+    </history>
+    <history>
+      <category>ENTERTAINMENT</category>
+      <description>Skate rental</description>
+      <price>30.00</price>
+    </history>
+    <history>
+      <category>OTHER</category>
+      <description>Sensodyne Pronamel Toothpaste</description>
+      <price>19.74</price>
+    </history>
+    <history>
+      <category>OTHER</category>
+      <description>Chick-fil-A $10 Gift Card</description>
+      <price>10.00</price>
+    </history>
+    <history>
+      <category>OTHER</category>
+      <description>Debt</description>
+      <price>3.50</price>
+    </history>
+  </history>
+  <balance>785.64</balance>
+</Account>
