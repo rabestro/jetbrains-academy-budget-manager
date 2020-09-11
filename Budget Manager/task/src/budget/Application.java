@@ -16,7 +16,7 @@ public class Application implements Runnable {
 
     @Override
     public void run() {
-        final var manager = new Manager(repository.getAccount(), ui);
+        final var manager = new Manager(repository, ui);
 
         ui.menu("main-menu")
                 .add("item.addIncome", manager::addIncome)
@@ -25,7 +25,7 @@ public class Application implements Runnable {
                 .add("item.balance", manager::printBalance)
                 .add("item.save", this::save)
                 .add("item.load", this::load)
-                .add("item.analyze", new Analyzer(repository.getAccount(), ui))
+                .add("item.analyze", new Analyzer(repository, ui))
                 .addExit()
                 .run();
 

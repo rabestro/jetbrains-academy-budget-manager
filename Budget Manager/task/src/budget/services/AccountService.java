@@ -1,19 +1,19 @@
 package budget.services;
 
-import budget.domain.Account;
 import budget.domain.Purchase;
+import budget.repository.FileStorage;
 import budget.ui.UI;
 
 import java.math.BigDecimal;
 import java.util.function.Consumer;
 
 abstract class AccountService {
-    final Account account;
+    final FileStorage db;
     final UI ui;
 
-    AccountService(final Account account, final UI userInterface) {
+    AccountService(final FileStorage repository, final UI userInterface) {
         this.ui = userInterface;
-        this.account = account;
+        this.db = repository;
     }
 
     void printEmpty() {

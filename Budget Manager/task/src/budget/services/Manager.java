@@ -1,7 +1,7 @@
 package budget.services;
 
-import budget.domain.Account;
 import budget.domain.Purchase;
+import budget.repository.FileStorage;
 import budget.ui.UI;
 
 import java.math.BigDecimal;
@@ -11,17 +11,17 @@ import static java.util.Objects.isNull;
 
 public class Manager extends AccountService {
 
-    public Manager(Account account, UI userInterface) {
-        super(account, userInterface);
+    public Manager(FileStorage repository, UI userInterface) {
+        super(repository, userInterface);
     }
 
     public void addIncome() {
         ui.println("enterIncome");
-        account.addIncome((BigDecimal) ui.readNumber());
+        db.getAccount().addIncome((BigDecimal) ui.readNumber());
     }
 
     public void printBalance() {
-        ui.println("balance", account.getBalance());
+        ui.println("balance", db.getAccount().getBalance());
     }
 
 
@@ -30,7 +30,7 @@ public class Manager extends AccountService {
         final var name = ui.readLine();
         System.out.println("Enter its price:");
         final var price = (BigDecimal) ui.readNumber();
-        account.addPurchase(new Purchase(category, name, price));
+        db.getAccount().addPurchase(new Purchase(category, name, price));
         System.out.println("Purchase was added!");
     }
 
@@ -39,7 +39,7 @@ public class Manager extends AccountService {
     }
 
     public void showPurchases() {
-        if (account.getHistory().size() == 0) {
+        if (db.getAccount().getHistory().size() == 0) {
             printEmpty();
         } else {
             getCategoryMenu(this::showPurchases, true).run();
@@ -48,7 +48,7 @@ public class Manager extends AccountService {
 
     public void showPurchases(final Purchase.Category category) {
         System.out.println(isNull(category) ? "All:" : category.name() + ":");
-        account.getHistory()
+        db.getAccount().getHistory()
                 .stream()
                 .filter(purchase -> isNull(category) || purchase.getCategory() == category)
                 .peek(System.out::println)

@@ -41,7 +41,7 @@ public class ConsoleMenu implements UI.Menu {
     }
 
     public ConsoleMenu addExit(final String key) {
-        return add(key, bundle.getString("menu.exit"), this::onlyOnce);
+        return add(key, "menu.exit", this::onlyOnce);
     }
 
     @Override

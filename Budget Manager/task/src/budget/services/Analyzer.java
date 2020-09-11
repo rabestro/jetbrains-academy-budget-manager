@@ -1,7 +1,7 @@
 package budget.services;
 
-import budget.domain.Account;
 import budget.domain.Purchase;
+import budget.repository.FileStorage;
 import budget.ui.ConsoleMenu;
 import budget.ui.UI;
 
@@ -13,8 +13,8 @@ import static java.util.stream.Collectors.reducing;
 
 public class Analyzer extends AccountService implements Runnable {
 
-    public Analyzer(Account account, UI userInterface) {
-        super(account, userInterface);
+    public Analyzer(FileStorage repository, UI userInterface) {
+        super(repository, userInterface);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class Analyzer extends AccountService implements Runnable {
     private void sortCertainType(Purchase.Category category) {
         System.out.println(category.name() + ":");
         ui.println(category.name());
-        account.getHistory()
+        db.getAccount().getHistory()
                 .stream()
                 .filter(purchase -> purchase.getCategory() == category)
                 .sorted(comparing(Purchase::getPrice).reversed())
@@ -46,12 +46,12 @@ public class Analyzer extends AccountService implements Runnable {
     }
 
     private void sortAll() {
-        if (account.getHistory().size() == 0) {
+        if (db.getAccount().getHistory().size() == 0) {
             printEmpty();
             return;
         }
         ui.println("sortAll");
-        account.getHistory()
+        db.getAccount().getHistory()
                 .stream()
                 .sorted(comparing(Purchase::getPrice).reversed())
                 .peek(System.out::println)
@@ -62,7 +62,7 @@ public class Analyzer extends AccountService implements Runnable {
 
     private void sortByType() {
         ui.println("types");
-        account.getHistory().stream()
+        db.getAccount().getHistory().stream()
                 .collect(groupingBy(Purchase::getCategory,
                         reducing(BigDecimal.ZERO, Purchase::getPrice, BigDecimal::add)))
                 .forEach((category, total) -> ui.println("categoryTotal", category, total));
