@@ -1,6 +1,6 @@
 package budget;
 
-import budget.domain.Analyzer;
+import budget.services.Analyzer;
 import budget.domain.Purchase;
 import budget.repository.FileStorage;
 import budget.ui.Menu;
