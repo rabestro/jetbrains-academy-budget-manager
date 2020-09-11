@@ -1,8 +1,10 @@
 package budget;
 
-import budget.services.Analyzer;
 import budget.domain.Purchase;
 import budget.repository.FileStorage;
+import budget.services.Analyzer;
+import budget.services.Manager;
+import budget.ui.ConsoleUI;
 import budget.ui.Menu;
 
 import java.math.BigDecimal;
@@ -15,14 +17,17 @@ import static java.util.Objects.isNull;
 public class Application implements Runnable {
     private final Scanner scanner;
     private final FileStorage db;
+    private final ConsoleUI ui;
 
-    public Application(final FileStorage repository) {
+    public Application(final FileStorage repository, final ConsoleUI userInterface) {
         db = repository;
+        ui = userInterface;
         scanner = new Scanner(System.in);
     }
 
     @Override
     public void run() {
+        final var manager = new Manager(db.getAccount(), ui);
 
         new Menu("Choose your action:")
                 .add("Add income", this::addIncome)
