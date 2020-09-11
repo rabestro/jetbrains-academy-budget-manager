@@ -6,11 +6,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 
 public class FileJackson implements FileStorage {
-    private final Account account;
     private final ObjectMapper objectMapper;
+    private Account account;
 
-    public FileJackson(Account account, ObjectMapper objectMapper) {
-        this.account = account;
+    public FileJackson(ObjectMapper objectMapper) {
+        this.account = new Account();
         this.objectMapper = objectMapper;
     }
 
@@ -20,7 +20,7 @@ public class FileJackson implements FileStorage {
             objectMapper
                     .writerWithDefaultPrettyPrinter()
                     .writeValue(DATABASE, account);
-//            System.out.println("Purchases were saved!");
+            System.out.println("Purchases were saved!");
             return true;
         } catch (IOException e) {
             e.printStackTrace();
@@ -30,6 +30,13 @@ public class FileJackson implements FileStorage {
 
     @Override
     public boolean load() {
+        try {
+            account = objectMapper
+                    .readValue(DATABASE, Account.class);
+            System.out.println("Purchases were loaded!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 }
