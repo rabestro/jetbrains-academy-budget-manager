@@ -29,7 +29,7 @@ public class Menu implements Runnable {
         this.format = bundle.getString("line-format");
     }
 
-    public Menu once() {
+    public Menu onlyOnce() {
         once = true;
         return this;
     }
@@ -49,11 +49,11 @@ public class Menu implements Runnable {
     }
 
     public Menu addExit() {
-        return add("0", "Exit", this::once);
+        return add("0", "Exit", this::onlyOnce);
     }
 
     public Menu addExit(final String key, final String name) {
-        return add(key, name, this::once);
+        return add(key, name, this::onlyOnce);
     }
 
     @Override

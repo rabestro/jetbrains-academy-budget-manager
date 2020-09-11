@@ -25,29 +25,29 @@ public class Purchase {
         return category;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    @Override
-    public String toString() {
-        return String.format("%s $%s", description, price);
-    }
-
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
+    public BigDecimal getPrice() {
+        return price;
+    }
+
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s $%s", description, price);
     }
 
     public enum Category {
