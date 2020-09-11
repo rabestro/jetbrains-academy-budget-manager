@@ -2,12 +2,9 @@ package budget.services;
 
 import budget.domain.Account;
 import budget.domain.Purchase;
-import budget.ui.ConsoleMenu;
 import budget.ui.UI;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.function.Consumer;
 
 import static java.util.Objects.isNull;
 
@@ -37,15 +34,8 @@ public class Manager extends AccountService {
         System.out.println("Purchase was added!");
     }
 
-    public ConsoleMenu getCategoryMenu(final Consumer<Purchase.Category> action, final boolean isAll) {
-        final var menu = new ConsoleMenu("Choose the type of purchase");
-        Arrays.stream(Purchase.Category.values())
-                .forEach(category -> menu.add(category.getDescription(), () -> action.accept(category)));
-        if (isAll) {
-            menu.add("All", () -> action.accept(null));
-        }
-        menu.add("Back", menu::onlyOnce);
-        return menu;
+    public UI.Menu getPurchaseMenu() {
+        return getCategoryMenu(this::addPurchase, false);
     }
 
     public void showPurchases() {

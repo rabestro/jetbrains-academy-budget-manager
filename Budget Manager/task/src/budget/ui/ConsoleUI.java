@@ -27,16 +27,17 @@ public class ConsoleUI implements UI {
 
     @Override
     public Menu menu() {
-        return new ConsoleMenu(bundle);
+        return new ConsoleMenu(bundle.getBaseBundleName());
     }
 
     @Override
-    public Menu menu(String title) {
-        return new ConsoleMenu(title);
+    public Menu menu(String bundle) {
+        return new ConsoleMenu(bundle);
     }
 
     @Override
     public String readLine() {
         return scanner.nextLine();
     }
+
 }
