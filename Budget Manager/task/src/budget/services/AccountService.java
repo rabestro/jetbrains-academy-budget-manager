@@ -17,7 +17,7 @@ abstract class AccountService {
     }
 
     void printEmpty() {
-        ui.println("list_empty");
+        ui.println("emptyList");
     }
 
     void printTotal(final BigDecimal total) {

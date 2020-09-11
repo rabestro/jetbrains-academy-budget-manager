@@ -8,7 +8,6 @@ import budget.ui.UI;
 import java.math.BigDecimal;
 
 import static java.util.Comparator.comparing;
-import static java.util.Objects.isNull;
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.reducing;
 
@@ -35,6 +34,7 @@ public class Analyzer extends AccountService implements Runnable {
 
     private void sortCertainType(Purchase.Category category) {
         System.out.println(category.name() + ":");
+        ui.println(category.name());
         account.getHistory()
                 .stream()
                 .filter(purchase -> purchase.getCategory() == category)
@@ -48,25 +48,24 @@ public class Analyzer extends AccountService implements Runnable {
     private void sortAll() {
         if (account.getHistory().size() == 0) {
             printEmpty();
-        } else {
-            System.out.println("All:");
-            account.getHistory()
-                    .stream()
-                    .sorted(comparing(Purchase::getPrice).reversed())
-                    .peek(System.out::println)
-                    .map(Purchase::getPrice)
-                    .reduce(BigDecimal::add)
-                    .ifPresentOrElse(this::printTotal, this::printEmpty);
+            return;
         }
+        ui.println("sortAll");
+        account.getHistory()
+                .stream()
+                .sorted(comparing(Purchase::getPrice).reversed())
+                .peek(System.out::println)
+                .map(Purchase::getPrice)
+                .reduce(BigDecimal::add)
+                .ifPresentOrElse(this::printTotal, this::printEmpty);
     }
 
     private void sortByType() {
-        System.out.println("Types:");
+        ui.println("types");
         account.getHistory().stream()
                 .collect(groupingBy(Purchase::getCategory,
                         reducing(BigDecimal.ZERO, Purchase::getPrice, BigDecimal::add)))
-                .forEach((category, total) -> System.out.printf("%s - $%s%n", category, total));
+                .forEach((category, total) -> ui.println("categoryTotal", category, total));
     }
-
 
 }

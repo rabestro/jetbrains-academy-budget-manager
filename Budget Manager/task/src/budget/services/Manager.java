@@ -16,7 +16,7 @@ public class Manager extends AccountService {
     }
 
     public void addIncome() {
-        ui.println("enter_income");
+        ui.println("enterIncome");
         account.addIncome((BigDecimal) ui.readNumber());
     }
 
