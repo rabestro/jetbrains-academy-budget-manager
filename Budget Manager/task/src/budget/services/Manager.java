@@ -23,6 +23,11 @@ public class Manager extends AccountService {
         account.addIncome(ui.readNumber());
     }
 
+    public void printBalance() {
+        ui.println("balance", account.getBalance());
+    }
+
+
     public void addPurchase(final Purchase.Category category) {
         System.out.println("Enter purchase name:");
         final var name = ui.readLine();
