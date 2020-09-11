@@ -6,10 +6,13 @@ import budget.ui.ConsoleMenu;
 import budget.ui.UI;
 
 import java.math.BigDecimal;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
+import static java.util.Collections.reverseOrder;
 import static java.util.Comparator.comparing;
-import static java.util.stream.Collectors.groupingBy;
-import static java.util.stream.Collectors.reducing;
+import static java.util.Map.Entry.comparingByValue;
+import static java.util.stream.Collectors.*;
 
 public class Analyzer extends AccountService implements Runnable {
 
@@ -65,7 +68,19 @@ public class Analyzer extends AccountService implements Runnable {
         db.getAccount().getHistory().stream()
                 .collect(groupingBy(Purchase::getCategory,
                         reducing(BigDecimal.ZERO, Purchase::getPrice, BigDecimal::add)))
-                .forEach((category, total) -> ui.println("categoryTotal", category, total));
+                .entrySet()
+                .stream()
+                .sorted(reverseOrder(comparingByValue(BigDecimal::compareTo)))
+                .collect(toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e2, LinkedHashMap::new))
+                .forEach((category, total) -> ui.println("categoryTotal", capitalize(category.name()), total));
+        final var total = db.getAccount().getHistory().stream()
+                .map(Purchase::getPrice)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        ui.println("totalSum", total);
+    }
+
+    public String capitalize(final String sentence) {
+        return sentence.substring(0, 1).toUpperCase() + sentence.substring(1).toLowerCase();
     }
 
 }
