@@ -39,4 +39,9 @@ public class FileJackson implements FileStorage {
         }
         return false;
     }
+
+    @Override
+    public Account getAccount() {
+        return account;
+    }
 }
