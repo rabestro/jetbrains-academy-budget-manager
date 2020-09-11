@@ -10,6 +10,8 @@ public interface UI {
 
     Menu menu();
 
+    Menu menu(String title);
+
     interface Menu extends Runnable {
         Menu add(String key, String description, Runnable action);
 

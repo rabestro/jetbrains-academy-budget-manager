@@ -19,7 +19,7 @@ public class Manager extends AccountService {
     }
 
     public void addIncome() {
-        System.out.println("Enter income:");
+        ui.println("enter_income");
         account.addIncome((BigDecimal) ui.readNumber());
     }
 
@@ -33,7 +33,7 @@ public class Manager extends AccountService {
         final var name = ui.readLine();
         System.out.println("Enter its price:");
         final var price = (BigDecimal) ui.readNumber();
-        account.addPurchase(new Purchase(category, name,  price));
+        account.addPurchase(new Purchase(category, name, price));
         System.out.println("Purchase was added!");
     }
 

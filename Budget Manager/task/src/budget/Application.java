@@ -4,41 +4,42 @@ import budget.domain.Purchase;
 import budget.repository.FileStorage;
 import budget.services.Analyzer;
 import budget.services.Manager;
-import budget.ui.ConsoleUI;
 import budget.ui.ConsoleMenu;
+import budget.ui.ConsoleUI;
+import budget.ui.UI;
 
 import java.util.Arrays;
 import java.util.function.Consumer;
 
 public class Application implements Runnable {
-    private final FileStorage db;
+    private final FileStorage repository;
     private final ConsoleUI ui;
 
     public Application(final FileStorage repository, final ConsoleUI userInterface) {
-        db = repository;
+        this.repository = repository;
         ui = userInterface;
     }
 
     @Override
     public void run() {
-        final var manager = new Manager(db.getAccount(), ui);
+        final var manager = new Manager(repository.getAccount(), ui);
 
-        new ConsoleMenu("Choose your action:")
+        ui.menu("Choose your action:")
                 .add("Add income", manager::addIncome)
                 .add("Add purchase", getCategoryMenu(manager::addPurchase, false))
                 .add("Show list of purchases", manager::showPurchases)
                 .add("Balance", manager::printBalance)
-                .add("Save", db::save)
-                .add("Load", db::load)
-                .add("Analyze (Sort)", new Analyzer(db.getAccount(), ui))
+                .add("Save", repository::save)
+                .add("Load", repository::load)
+                .add("Analyze (Sort)", new Analyzer(repository.getAccount(), ui))
                 .addExit()
                 .run();
 
         System.out.println("Bye!");
     }
 
-    public ConsoleMenu getCategoryMenu(final Consumer<Purchase.Category> action, final boolean isAll) {
-        final var menu = new ConsoleMenu("Choose the type of purchase");
+    public UI.Menu getCategoryMenu(final Consumer<Purchase.Category> action, final boolean isAll) {
+        final var menu = ui.menu("Choose the type of purchase");
         Arrays.stream(Purchase.Category.values())
                 .forEach(category -> menu.add(category.name(), () -> action.accept(category)));
         if (isAll) {

@@ -31,6 +31,11 @@ public class ConsoleUI implements UI {
     }
 
     @Override
+    public Menu menu(String title) {
+        return new ConsoleMenu(title);
+    }
+
+    @Override
     public String readLine() {
         return scanner.nextLine();
     }
