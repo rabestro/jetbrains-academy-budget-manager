@@ -6,4 +6,7 @@ public interface FileStorage {
     String FILE_NAME = "purchases.txt";
     File DATABASE = new File(FILE_NAME);
 
+    boolean save();
+
+    boolean load();
 }
