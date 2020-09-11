@@ -14,10 +14,6 @@ public class ConsoleUI implements UI {
         this.bundle = bundle;
     }
 
-    public void printTotal(final BigDecimal total) {
-        System.out.println("Total: $" + total);
-    }
-
     @Override
     public void println(String pattern, Object... args) {
         System.out.println(MessageFormat.format(pattern, args));

@@ -8,18 +8,15 @@ import budget.ui.ConsoleUI;
 import budget.ui.Menu;
 
 import java.util.Arrays;
-import java.util.Scanner;
 import java.util.function.Consumer;
 
 public class Application implements Runnable {
-    private final Scanner scanner;
     private final FileStorage db;
     private final ConsoleUI ui;
 
     public Application(final FileStorage repository, final ConsoleUI userInterface) {
         db = repository;
         ui = userInterface;
-        scanner = new Scanner(System.in);
     }
 
     @Override

@@ -42,9 +42,7 @@ public class Analyzer extends AccountService implements Runnable {
                 .peek(System.out::println)
                 .map(Purchase::getPrice)
                 .reduce(BigDecimal::add)
-                .ifPresentOrElse(
-                        total -> System.out.println("Total sum: $" + total),
-                        this::printEmpty);
+                .ifPresentOrElse(this::printTotal, this::printEmpty);
     }
 
     private void sortAll() {
@@ -58,9 +56,7 @@ public class Analyzer extends AccountService implements Runnable {
                     .peek(System.out::println)
                     .map(Purchase::getPrice)
                     .reduce(BigDecimal::add)
-                    .ifPresentOrElse(
-                            total -> System.out.println("Total: $" + total),
-                            this::printEmpty);
+                    .ifPresentOrElse(this::printTotal, this::printEmpty);
         }
     }
 
