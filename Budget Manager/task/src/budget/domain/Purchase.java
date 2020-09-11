@@ -3,7 +3,6 @@ package budget.domain;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.MessageFormat;
-import java.util.ResourceBundle;
 
 public class Purchase {
     private Category category;
