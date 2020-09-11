@@ -25,12 +25,7 @@ public class Analyzer extends AccountService implements Runnable {
         new ConsoleMenu("menu-analyze")
                 .add("item.all", this::sortAll)
                 .add("item.type", this::sortByType)
-                .add("item.certain", new ConsoleMenu("menu-purchase")
-                        .onlyOnce()
-                        .add("FOOD", () -> sortCertainType(Purchase.Category.FOOD))
-                        .add("CLOTHES", () -> sortCertainType(Purchase.Category.CLOTHES))
-                        .add("ENTERTAINMENT", () -> sortCertainType(Purchase.Category.ENTERTAINMENT))
-                        .add("OTHER", () -> sortCertainType(Purchase.Category.OTHER)))
+                .add("item.certain", getCategoryMenu(this::sortCertainType).onlyOnce())
                 .addExit("4")
                 .run();
     }
@@ -73,6 +68,7 @@ public class Analyzer extends AccountService implements Runnable {
                 .sorted(reverseOrder(comparingByValue(BigDecimal::compareTo)))
                 .collect(toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e2, LinkedHashMap::new))
                 .forEach((category, total) -> ui.println("categoryTotal", capitalize(category.name()), total));
+
         final var total = db.getAccount().getHistory().stream()
                 .map(Purchase::getPrice)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);

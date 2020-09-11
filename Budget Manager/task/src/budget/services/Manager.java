@@ -44,7 +44,7 @@ public class Manager extends AccountService {
             printEmpty();
             return;
         }
-        final var menu = getCategoryMenu(this::addPurchase);
+        final var menu = getCategoryMenu(this::showPurchases);
         menu.add("all", () -> showPurchases(null))
                 .add("menu.exit", menu::onlyOnce)
                 .run();
