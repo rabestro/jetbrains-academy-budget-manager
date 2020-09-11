@@ -21,6 +21,6 @@ public interface UI {
 
         Menu addExit();
 
-        Menu addExit(String key, String name);
+        Menu addExit(String key);
     }
 }

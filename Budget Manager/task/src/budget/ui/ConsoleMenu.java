@@ -33,15 +33,15 @@ public class ConsoleMenu implements UI.Menu {
     }
 
     public ConsoleMenu add(final String description, final Runnable action) {
-        return add(String.valueOf(map.size() + 1), bundle.getString(description), action);
+        return add(String.valueOf(map.size() + 1), description, action);
     }
 
     public ConsoleMenu addExit() {
-        return add("0", bundle.getString("menu.exit"), this::onlyOnce);
+        return add("0", "menu.exit", this::onlyOnce);
     }
 
-    public ConsoleMenu addExit(final String key, final String name) {
-        return add(key, name, this::onlyOnce);
+    public ConsoleMenu addExit(final String key) {
+        return add(key, bundle.getString("menu.exit"), this::onlyOnce);
     }
 
     @Override

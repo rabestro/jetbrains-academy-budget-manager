@@ -20,16 +20,16 @@ public class Analyzer extends AccountService implements Runnable {
 
     @Override
     public void run() {
-        new ConsoleMenu("How do you want to sort?")
-                .add("Sort all purchases", this::sortAll)
-                .add("Sort by type", this::sortByType)
-                .add("Sort certain type", new ConsoleMenu("Choose the type of purchase")
-                        .add("Food", () -> sortCertainType(Purchase.Category.FOOD))
-                        .add("Clothes", () -> sortCertainType(Purchase.Category.CLOTHES))
-                        .add("Entertainment", () -> sortCertainType(Purchase.Category.ENTERTAINMENT))
-                        .add("Other", () -> sortCertainType(Purchase.Category.OTHER)))
-                .onlyOnce()
-                .addExit("4", "Back")
+        new ConsoleMenu("menu-analyze")
+                .add("item.all", this::sortAll)
+                .add("item.type", this::sortByType)
+                .add("item.certain", new ConsoleMenu("menu-purchase")
+                        .onlyOnce()
+                        .add("FOOD", () -> sortCertainType(Purchase.Category.FOOD))
+                        .add("CLOTHES", () -> sortCertainType(Purchase.Category.CLOTHES))
+                        .add("ENTERTAINMENT", () -> sortCertainType(Purchase.Category.ENTERTAINMENT))
+                        .add("OTHER", () -> sortCertainType(Purchase.Category.OTHER)))
+                .addExit("4")
                 .run();
     }
 
@@ -37,7 +37,7 @@ public class Analyzer extends AccountService implements Runnable {
         System.out.println(category.name() + ":");
         account.getHistory()
                 .stream()
-                .filter(purchase -> isNull(category) || purchase.getCategory() == category)
+                .filter(purchase -> purchase.getCategory() == category)
                 .sorted(comparing(Purchase::getPrice).reversed())
                 .peek(System.out::println)
                 .map(Purchase::getPrice)
