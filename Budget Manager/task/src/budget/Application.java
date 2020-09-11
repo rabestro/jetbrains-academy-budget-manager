@@ -1,14 +1,10 @@
 package budget;
 
-import budget.domain.Account;
 import budget.domain.Analyzer;
 import budget.domain.Purchase;
+import budget.repository.FileStorage;
 import budget.ui.Menu;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
-import java.io.File;
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -17,15 +13,12 @@ import java.util.function.Consumer;
 import static java.util.Objects.isNull;
 
 public class Application implements Runnable {
-    private static final File DATABASE = new File("purchases.txt");
-    private static final ObjectMapper MAPPER = new XmlMapper();
-
     private final Scanner scanner;
-    private Account account;
+    private final FileStorage db;
 
-    public Application(Account account) {
+    public Application(final FileStorage repository) {
+        db = repository;
         scanner = new Scanner(System.in);
-        this.account = account;
     }
 
     @Override
@@ -36,40 +29,22 @@ public class Application implements Runnable {
                 .add("Add purchase", getCategoryMenu(this::addPurchase, false))
                 .add("Show list of purchases", this::showPurchases)
                 .add("Balance", this::printBalance)
-                .add("Save", this::save)
-                .add("Load", this::load)
-                .add("Analyze (Sort)", new Analyzer(account))
+                .add("Save", db::save)
+                .add("Load", db::load)
+                .add("Analyze (Sort)", new Analyzer(db.getAccount()))
                 .addExit()
                 .run();
 
         System.out.println("Bye!");
     }
 
-    private void load() {
-        try {
-            account = MAPPER.readValue(DATABASE, Account.class);
-            System.out.println("Purchases were loaded!");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void save() {
-        try {
-            MAPPER.writerWithDefaultPrettyPrinter().writeValue(DATABASE, account);
-            System.out.println("Purchases were saved!");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     private void addIncome() {
         System.out.println("Enter income:");
-        account.addIncome(new BigDecimal(scanner.nextLine()));
+        db.getAccount().addIncome(new BigDecimal(scanner.nextLine()));
     }
 
     private void printBalance() {
-        System.out.println("Balance: $" + account.getBalance());
+        System.out.println("Balance: $" + db.getAccount().getBalance());
     }
 
     private void addPurchase(final Purchase.Category category) {
@@ -77,7 +52,7 @@ public class Application implements Runnable {
         final var name = scanner.nextLine();
         System.out.println("Enter its price:");
         final var price = new BigDecimal(scanner.nextLine());
-        account.addPurchase(new Purchase(category, name, price));
+        db.getAccount().addPurchase(new Purchase(category, name, price));
         System.out.println("Purchase was added!");
     }
 
@@ -97,7 +72,7 @@ public class Application implements Runnable {
     }
 
     private void showPurchases() {
-        if (account.getHistory().size() == 0) {
+        if (db.getAccount().getHistory().size() == 0) {
             printListEmpty();
         } else {
             getCategoryMenu(this::showPurchases, true).run();
@@ -106,7 +81,7 @@ public class Application implements Runnable {
 
     private void showPurchases(final Purchase.Category category) {
         System.out.println(isNull(category) ? "All:" : category.name() + ":");
-        account.getHistory()
+        db.getAccount().getHistory()
                 .stream()
                 .filter(purchase -> isNull(category) || purchase.getCategory() == category)
                 .peek(System.out::println)
