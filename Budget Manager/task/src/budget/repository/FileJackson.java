@@ -20,7 +20,6 @@ public class FileJackson implements FileStorage {
             objectMapper
                     .writerWithDefaultPrettyPrinter()
                     .writeValue(DATABASE, account);
-            System.out.println("Purchases were saved!");
             return true;
         } catch (IOException e) {
             e.printStackTrace();
@@ -33,7 +32,7 @@ public class FileJackson implements FileStorage {
         try {
             account = objectMapper
                     .readValue(DATABASE, Account.class);
-            System.out.println("Purchases were loaded!");
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
         }

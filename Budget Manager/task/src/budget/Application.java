@@ -23,8 +23,8 @@ public class Application implements Runnable {
                 .add("item.addPurchase", manager.getPurchaseMenu())
                 .add("item.purchases", manager::showPurchases)
                 .add("item.balance", manager::printBalance)
-                .add("item.save", repository::save)
-                .add("item.load", repository::load)
+                .add("item.save", this::save)
+                .add("item.load", this::load)
                 .add("item.analyze", new Analyzer(repository.getAccount(), ui))
                 .addExit()
                 .run();
@@ -32,4 +32,11 @@ public class Application implements Runnable {
         ui.println("bye");
     }
 
+    private void save() {
+        ui.println(repository.save() ? "saved" : "error.save", FileStorage.DATABASE.getAbsolutePath());
+    }
+
+    private void load() {
+        ui.println(repository.load() ? "loaded" : "error.load", FileStorage.DATABASE.getAbsolutePath());
+    }
 }

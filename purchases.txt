@@ -1,90 +1,54 @@
-<Account>
-  <history>
-    <history>
-      <category>FOOD</category>
-      <description>Almond 250g</description>
-      <price>35.43</price>
-    </history>
-    <history>
-      <category>FOOD</category>
-      <description>Milk</description>
-      <price>3.50</price>
-    </history>
-    <history>
-      <category>FOOD</category>
-      <description>Red Fuji Apple</description>
-      <price>5.99</price>
-    </history>
-    <history>
-      <category>FOOD</category>
-      <description>Eggs</description>
-      <price>3.99</price>
-    </history>
-    <history>
-      <category>FOOD</category>
-      <description>FIJI Natural Artesian Water</description>
-      <price>25.98</price>
-    </history>
-    <history>
-      <category>FOOD</category>
-      <description>Hershey's milk chocolate bars</description>
-      <price>8.54</price>
-    </history>
-    <history>
-      <category>FOOD</category>
-      <description>Great Value Broccoli Florets</description>
-      <price>1.00</price>
-    </history>
-    <history>
-      <category>FOOD</category>
-      <description>Keystone Ground Bee</description>
-      <price>6.28</price>
-    </history>
-    <history>
-      <category>CLOTHES</category>
-      <description>Gildan LT</description>
-      <price>8.61</price>
-    </history>
-    <history>
-      <category>CLOTHES</category>
-      <description>Men's Dual Defense Crew Socks 12 Pairs</description>
-      <price>13.00</price>
-    </history>
-    <history>
-      <category>CLOTHES</category>
-      <description>Wrangler Men's Stretch Cargo Pant</description>
-      <price>19.97</price>
-    </history>
-    <history>
-      <category>ENTERTAINMENT</category>
-      <description>LEGO DUPLO Town Farm Animals</description>
-      <price>10.10</price>
-    </history>
-    <history>
-      <category>ENTERTAINMENT</category>
-      <description>Cinema</description>
-      <price>8.73</price>
-    </history>
-    <history>
-      <category>ENTERTAINMENT</category>
-      <description>Skate rental</description>
-      <price>30.00</price>
-    </history>
-    <history>
-      <category>OTHER</category>
-      <description>Sensodyne Pronamel Toothpaste</description>
-      <price>19.74</price>
-    </history>
-    <history>
-      <category>OTHER</category>
-      <description>Chick-fil-A $10 Gift Card</description>
-      <price>10.00</price>
-    </history>
-    <history>
-      <category>OTHER</category>
-      <description>Debt</description>
-      <price>3.50</price>
-    </history>
-  </history>
-  <balance>785.64</balance>
-</Account>
+---
+history:
+- category: "FOOD"
+  description: "Almond 250g"
+  price: 35.43
+- category: "FOOD"
+  description: "Milk"
+  price: 3.50
+- category: "FOOD"
+  description: "Red Fuji Apple"
+  price: 5.99
+- category: "FOOD"
+  description: "Eggs"
+  price: 3.99
+- category: "FOOD"
+  description: "FIJI Natural Artesian Water"
+  price: 25.98
+- category: "FOOD"
+  description: "Hershey's milk chocolate bars"
+  price: 8.54
+- category: "FOOD"
+  description: "Great Value Broccoli Florets"
+  price: 1.00
+- category: "FOOD"
+  description: "Keystone Ground Bee"
+  price: 6.28
+- category: "CLOTHES"
+  description: "Gildan LT"
+  price: 8.61
+- category: "CLOTHES"
+  description: "Men's Dual Defense Crew Socks 12 Pairs"
+  price: 13.00
+- category: "CLOTHES"
+  description: "Wrangler Men's Stretch Cargo Pant"
+  price: 19.97
+- category: "ENTERTAINMENT"
+  description: "LEGO DUPLO Town Farm Animals"
+  price: 10.10
+- category: "ENTERTAINMENT"
+  description: "Cinema"
+  price: 8.73
+- category: "ENTERTAINMENT"
+  description: "Skate rental"
+  price: 30.00
+- category: "OTHER"
+  description: "Sensodyne Pronamel Toothpaste"
+  price: 19.74
+- category: "OTHER"
+  description: "Chick-fil-A $10 Gift Card"
+  price: 10.00
+- category: "OTHER"
+  description: "Debt"
+  price: 3.50
+balance: 785.64
