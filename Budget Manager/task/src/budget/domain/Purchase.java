@@ -49,7 +49,7 @@ public class Purchase {
 
     @Override
     public String toString() {
-        return MessageFormat.format("{0} {1,currency}", description, price);
+        return MessageFormat.format("{0} {1, number, currency}", description, price);
     }
 
     public enum Category {
