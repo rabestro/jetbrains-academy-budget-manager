@@ -30,10 +30,10 @@ public class Application implements Runnable {
         final var manager = new Manager(db.getAccount(), ui);
 
         new Menu("Choose your action:")
-                .add("Add income", this::addIncome)
-                .add("Add purchase", getCategoryMenu(this::addPurchase, false))
+                .add("Add income", manager::addIncome)
+                .add("Add purchase", getCategoryMenu(manager::addPurchase, false))
                 .add("Show list of purchases", this::showPurchases)
-                .add("Balance", this::printBalance)
+                .add("Balance", manager::printBalance)
                 .add("Save", db::save)
                 .add("Load", db::load)
                 .add("Analyze (Sort)", new Analyzer(db.getAccount()))
@@ -41,24 +41,6 @@ public class Application implements Runnable {
                 .run();
 
         System.out.println("Bye!");
-    }
-
-    private void addIncome() {
-        System.out.println("Enter income:");
-        db.getAccount().addIncome(new BigDecimal(scanner.nextLine()));
-    }
-
-    private void printBalance() {
-        System.out.println("Balance: $" + db.getAccount().getBalance());
-    }
-
-    private void addPurchase(final Purchase.Category category) {
-        System.out.println("Enter purchase name:");
-        final var name = scanner.nextLine();
-        System.out.println("Enter its price:");
-        final var price = new BigDecimal(scanner.nextLine());
-        db.getAccount().addPurchase(new Purchase(category, name, price));
-        System.out.println("Purchase was added!");
     }
 
     private void printListEmpty() {

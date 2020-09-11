@@ -6,6 +6,8 @@ import java.math.RoundingMode;
 public interface UI {
     void printTotal(final BigDecimal total);
 
+    void println(String pattern, Object ...args);
+
     String readLine();
 
     default BigDecimal readNumber() {

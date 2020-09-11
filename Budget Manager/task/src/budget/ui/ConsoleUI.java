@@ -2,6 +2,7 @@ package budget.ui;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.MessageFormat;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
@@ -15,6 +16,11 @@ public class ConsoleUI implements UI {
 
     public void printTotal(final BigDecimal total) {
         System.out.println("Total: $" + total);
+    }
+
+    @Override
+    public void println(String pattern, Object... args) {
+        System.out.println(MessageFormat.format(pattern, args));
     }
 
     public BigDecimal readNumber() {

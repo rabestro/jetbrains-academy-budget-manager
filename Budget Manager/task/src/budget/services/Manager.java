@@ -14,16 +14,16 @@ public class Manager {
         this.account = account;
     }
 
-    private void addIncome() {
+    public void addIncome() {
         System.out.println("Enter income:");
         account.addIncome(ui.readNumber());
     }
 
-    private void printBalance() {
+    public void printBalance() {
         System.out.println("Balance: $" + account.getBalance());
     }
 
-    private void addPurchase(final Purchase.Category category) {
+    public void addPurchase(final Purchase.Category category) {
         System.out.println("Enter purchase name:");
         final var name = ui.readLine();
         System.out.println("Enter its price:");
