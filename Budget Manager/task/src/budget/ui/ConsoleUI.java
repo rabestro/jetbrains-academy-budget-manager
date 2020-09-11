@@ -16,7 +16,7 @@ public class ConsoleUI implements UI {
 
     @Override
     public void println(String pattern, Object... args) {
-        System.out.println(MessageFormat.format(pattern, args));
+        System.out.println(MessageFormat.format(bundle.getString(pattern), args));
     }
 
     @Override

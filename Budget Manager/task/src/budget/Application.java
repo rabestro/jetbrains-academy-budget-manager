@@ -4,7 +4,6 @@ import budget.domain.Purchase;
 import budget.repository.FileStorage;
 import budget.services.Analyzer;
 import budget.services.Manager;
-import budget.ui.ConsoleMenu;
 import budget.ui.ConsoleUI;
 import budget.ui.UI;
 
