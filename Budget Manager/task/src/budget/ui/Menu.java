@@ -79,7 +79,7 @@ public class Menu implements Runnable {
         private final String description;
         private final Runnable action;
 
-        Entry(final String name, final Runnable action) {
+        private Entry(final String name, final Runnable action) {
             this.description = name;
             this.action = action;
         }

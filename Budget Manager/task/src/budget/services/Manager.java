@@ -40,7 +40,7 @@ public class Manager extends AccountService {
     public Menu getCategoryMenu(final Consumer<Purchase.Category> action, final boolean isAll) {
         final var menu = new Menu("Choose the type of purchase");
         Arrays.stream(Purchase.Category.values())
-                .forEach(category -> menu.add(category.name(), () -> action.accept(category)));
+                .forEach(category -> menu.add(category.getDescription(), () -> action.accept(category)));
         if (isAll) {
             menu.add("All", () -> action.accept(null));
         }

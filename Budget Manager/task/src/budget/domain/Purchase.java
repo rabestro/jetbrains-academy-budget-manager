@@ -2,6 +2,7 @@ package budget.domain;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ResourceBundle;
 
 public class Purchase {
     private Category category;
@@ -51,7 +52,17 @@ public class Purchase {
     }
 
     public enum Category {
-        FOOD, CLOTHES, ENTERTAINMENT, OTHER
+        FOOD, CLOTHES, ENTERTAINMENT, OTHER;
+        private final String description;
+
+        Category() {
+            description = ResourceBundle.getBundle("categories")
+                    .getString(this.name().toLowerCase());
+        }
+
+        public String getDescription() {
+            return description;
+        }
     }
 
 }
