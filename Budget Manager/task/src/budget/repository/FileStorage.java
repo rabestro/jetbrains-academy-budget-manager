@@ -1,5 +1,7 @@
 package budget.repository;
 
+import budget.domain.Account;
+
 import java.io.File;
 
 public interface FileStorage {
@@ -9,4 +11,6 @@ public interface FileStorage {
     boolean save();
 
     boolean load();
+
+    Account getAccount();
 }
