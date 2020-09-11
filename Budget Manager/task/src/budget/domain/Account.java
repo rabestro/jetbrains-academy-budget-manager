@@ -27,12 +27,12 @@ public class Account {
         return balance;
     }
 
-    public List<Purchase> getHistory() {
-        return history;
-    }
-
     public void setBalance(final BigDecimal balance) {
         this.balance = balance;
+    }
+
+    public List<Purchase> getHistory() {
+        return history;
     }
 
     public void setHistory(final List<Purchase> history) {

@@ -6,50 +6,42 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
-import static java.util.Objects.nonNull;
-
-public class Menu implements Runnable {
+public class ConsoleMenu implements UI.Menu {
     private static final Scanner scanner = new Scanner(System.in);
 
     private final Map<String, Entry> map = new LinkedHashMap<>();
     private final ResourceBundle bundle;
 
     private final String title;
+    private final String format;
     private boolean once;
-    private String format = "%s) %s%n";
 
-    public Menu(final String title) {
-        this.title = title;
-        bundle = null;
+    public ConsoleMenu(final String bundleName) {
+        this.bundle = ResourceBundle.getBundle(bundleName);
+        this.title = bundle.getString("menu.title");
+        this.format = bundle.getString("menu.format");
     }
 
-    public Menu(final ResourceBundle bundle) {
-        this.bundle = bundle;
-        this.title = bundle.getString("title");
-        this.format = bundle.getString("line-format");
-    }
-
-    public Menu once() {
+    public ConsoleMenu onlyOnce() {
         once = true;
         return this;
     }
 
-    public Menu setFormat(String pattern) {
-        format = pattern;
+    public ConsoleMenu add(final String key, final String description, final Runnable action) {
+        map.put(key, new Entry(bundle.getString(description), action));
         return this;
     }
 
-    public Menu add(final String key, final String description, final Runnable action) {
-        map.put(key, new Entry(description, action));
-        return this;
-    }
-
-    public Menu add(final String description, final Runnable action) {
+    public ConsoleMenu add(final String description, final Runnable action) {
         return add(String.valueOf(map.size() + 1), description, action);
     }
 
-    public Menu addExit() {
-        return add("0", "Exit", this::once);
+    public ConsoleMenu addExit() {
+        return add("0", "menu.exit", this::onlyOnce);
+    }
+
+    public ConsoleMenu addExit(final String key) {
+        return add(key, "menu.exit", this::onlyOnce);
     }
 
     @Override
@@ -57,7 +49,7 @@ public class Menu implements Runnable {
         do {
             System.out.println();
             System.out.println(title);
-            map.forEach((key, entry) -> System.out.printf(format, key, entry));
+            map.forEach((key, entry) -> System.out.println(MessageFormat.format(format, key, entry)));
             final var key = scanner.nextLine().toLowerCase();
             System.out.println();
             map.getOrDefault(key, new Entry("Error", this::printErrorMessage)).run();
@@ -65,17 +57,14 @@ public class Menu implements Runnable {
     }
 
     private void printErrorMessage() {
-        final var msg = nonNull(bundle)
-                ? bundle.getString("error")
-                : "Please enter the number from 0 up to {0}";
-        System.out.println(MessageFormat.format(msg, map.size()));
+        System.out.println(MessageFormat.format(bundle.getString("menu.error"), map.size()));
     }
 
     private static final class Entry implements Runnable {
         private final String description;
         private final Runnable action;
 
-        Entry(final String name, final Runnable action) {
+        private Entry(final String name, final Runnable action) {
             this.description = name;
             this.action = action;
         }
