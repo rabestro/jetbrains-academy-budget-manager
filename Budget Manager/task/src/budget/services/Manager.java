@@ -35,15 +35,19 @@ public class Manager extends AccountService {
     }
 
     public UI.Menu getPurchaseMenu() {
-        return getCategoryMenu(this::addPurchase, false);
+        final var menu = getCategoryMenu(this::addPurchase);
+        return menu.add("menu.exit", menu::onlyOnce);
     }
 
     public void showPurchases() {
         if (db.getAccount().getHistory().size() == 0) {
             printEmpty();
-        } else {
-            getCategoryMenu(this::showPurchases, true).run();
+            return;
         }
+        final var menu = getCategoryMenu(this::addPurchase);
+        menu.add("all", () -> showPurchases(null))
+                .add("menu.exit", menu::onlyOnce)
+                .run();
     }
 
     public void showPurchases(final Purchase.Category category) {
@@ -54,9 +58,7 @@ public class Manager extends AccountService {
                 .peek(System.out::println)
                 .map(Purchase::getPrice)
                 .reduce(BigDecimal::add)
-                .ifPresentOrElse(
-                        total -> System.out.println("Total sum: $" + total),
-                        this::printEmpty);
+                .ifPresentOrElse(this::printTotal, this::printEmpty);
     }
 
 }
