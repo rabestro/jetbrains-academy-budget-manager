@@ -3,6 +3,7 @@ package budget.services;
 import budget.domain.Account;
 import budget.domain.Purchase;
 import budget.ui.Menu;
+import budget.ui.UI;
 
 import java.math.BigDecimal;
 
@@ -11,11 +12,10 @@ import static java.util.Objects.isNull;
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.reducing;
 
-public class Analyzer implements Runnable {
-    private final Account account;
+public class Analyzer extends AccountService implements Runnable {
 
-    public Analyzer(Account account) {
-        this.account = account;
+    public Analyzer(Account account, UI userInterface) {
+        super(account, userInterface);
     }
 
     @Override
@@ -72,8 +72,5 @@ public class Analyzer implements Runnable {
                 .forEach((category, total) -> System.out.printf("%s - $%s%n", category, total));
     }
 
-    private void printEmpty() {
-        System.out.println("Purchase list is empty!");
-    }
 
 }

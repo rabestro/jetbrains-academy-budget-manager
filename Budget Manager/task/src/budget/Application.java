@@ -7,12 +7,9 @@ import budget.services.Manager;
 import budget.ui.ConsoleUI;
 import budget.ui.Menu;
 
-import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.function.Consumer;
-
-import static java.util.Objects.isNull;
 
 public class Application implements Runnable {
     private final Scanner scanner;
@@ -32,22 +29,18 @@ public class Application implements Runnable {
         new Menu("Choose your action:")
                 .add("Add income", manager::addIncome)
                 .add("Add purchase", getCategoryMenu(manager::addPurchase, false))
-                .add("Show list of purchases", this::showPurchases)
+                .add("Show list of purchases", manager::showPurchases)
                 .add("Balance", manager::printBalance)
                 .add("Save", db::save)
                 .add("Load", db::load)
-                .add("Analyze (Sort)", new Analyzer(db.getAccount()))
+                .add("Analyze (Sort)", new Analyzer(db.getAccount(), ui))
                 .addExit()
                 .run();
 
         System.out.println("Bye!");
     }
 
-    private void printListEmpty() {
-        System.out.println("Purchase list is empty!");
-    }
-
-    private Menu getCategoryMenu(final Consumer<Purchase.Category> action, final boolean isAll) {
+    public Menu getCategoryMenu(final Consumer<Purchase.Category> action, final boolean isAll) {
         final var menu = new Menu("Choose the type of purchase");
         Arrays.stream(Purchase.Category.values())
                 .forEach(category -> menu.add(category.name(), () -> action.accept(category)));
@@ -58,24 +51,4 @@ public class Application implements Runnable {
         return menu;
     }
 
-    private void showPurchases() {
-        if (db.getAccount().getHistory().size() == 0) {
-            printListEmpty();
-        } else {
-            getCategoryMenu(this::showPurchases, true).run();
-        }
-    }
-
-    private void showPurchases(final Purchase.Category category) {
-        System.out.println(isNull(category) ? "All:" : category.name() + ":");
-        db.getAccount().getHistory()
-                .stream()
-                .filter(purchase -> isNull(category) || purchase.getCategory() == category)
-                .peek(System.out::println)
-                .map(Purchase::getPrice)
-                .reduce(BigDecimal::add)
-                .ifPresentOrElse(
-                        total -> System.out.println("Total sum: $" + total),
-                        this::printListEmpty);
-    }
 }
