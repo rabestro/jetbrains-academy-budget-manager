@@ -5,7 +5,7 @@ import budget.repository.FileStorage;
 import budget.services.Analyzer;
 import budget.services.Manager;
 import budget.ui.ConsoleUI;
-import budget.ui.Menu;
+import budget.ui.ConsoleMenu;
 
 import java.util.Arrays;
 import java.util.function.Consumer;
@@ -23,7 +23,7 @@ public class Application implements Runnable {
     public void run() {
         final var manager = new Manager(db.getAccount(), ui);
 
-        new Menu("Choose your action:")
+        new ConsoleMenu("Choose your action:")
                 .add("Add income", manager::addIncome)
                 .add("Add purchase", getCategoryMenu(manager::addPurchase, false))
                 .add("Show list of purchases", manager::showPurchases)
@@ -37,8 +37,8 @@ public class Application implements Runnable {
         System.out.println("Bye!");
     }
 
-    public Menu getCategoryMenu(final Consumer<Purchase.Category> action, final boolean isAll) {
-        final var menu = new Menu("Choose the type of purchase");
+    public ConsoleMenu getCategoryMenu(final Consumer<Purchase.Category> action, final boolean isAll) {
+        final var menu = new ConsoleMenu("Choose the type of purchase");
         Arrays.stream(Purchase.Category.values())
                 .forEach(category -> menu.add(category.name(), () -> action.accept(category)));
         if (isAll) {

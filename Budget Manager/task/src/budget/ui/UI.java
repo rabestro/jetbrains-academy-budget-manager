@@ -1,15 +1,24 @@
 package budget.ui;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-
 public interface UI {
 
     void println(String pattern, Object... args);
 
     String readLine();
 
-    default BigDecimal readNumber() {
-        return new BigDecimal(readLine()).setScale(2, RoundingMode.HALF_EVEN);
+    Number readNumber();
+
+    Menu menu();
+
+    interface Menu extends Runnable {
+        Menu add(String key, String description, Runnable action);
+
+        Menu add(String description, Runnable action);
+
+        Menu onlyOnce();
+
+        Menu addExit();
+
+        Menu addExit(String key, String name);
     }
 }

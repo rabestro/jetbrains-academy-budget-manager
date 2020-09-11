@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 import static java.util.Objects.nonNull;
 
-public class Menu implements Runnable {
+public class ConsoleMenu implements UI.Menu {
     private static final Scanner scanner = new Scanner(System.in);
 
     private final Map<String, Entry> map = new LinkedHashMap<>();
@@ -18,41 +18,41 @@ public class Menu implements Runnable {
     private boolean once;
     private String format = "%s) %s%n";
 
-    public Menu(final String title) {
+    public ConsoleMenu(final String title) {
         this.title = title;
         bundle = null;
     }
 
-    public Menu(final ResourceBundle bundle) {
+    public ConsoleMenu(final ResourceBundle bundle) {
         this.bundle = bundle;
         this.title = bundle.getString("title");
         this.format = bundle.getString("line-format");
     }
 
-    public Menu onlyOnce() {
+    public ConsoleMenu onlyOnce() {
         once = true;
         return this;
     }
 
-    public Menu setFormat(String pattern) {
+    public ConsoleMenu setFormat(String pattern) {
         format = pattern;
         return this;
     }
 
-    public Menu add(final String key, final String description, final Runnable action) {
+    public ConsoleMenu add(final String key, final String description, final Runnable action) {
         map.put(key, new Entry(description, action));
         return this;
     }
 
-    public Menu add(final String description, final Runnable action) {
+    public ConsoleMenu add(final String description, final Runnable action) {
         return add(String.valueOf(map.size() + 1), description, action);
     }
 
-    public Menu addExit() {
+    public ConsoleMenu addExit() {
         return add("0", "Exit", this::onlyOnce);
     }
 
-    public Menu addExit(final String key, final String name) {
+    public ConsoleMenu addExit(final String key, final String name) {
         return add(key, name, this::onlyOnce);
     }
 

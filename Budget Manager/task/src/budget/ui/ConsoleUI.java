@@ -19,9 +19,15 @@ public class ConsoleUI implements UI {
         System.out.println(MessageFormat.format(pattern, args));
     }
 
+    @Override
     public BigDecimal readNumber() {
         return new BigDecimal(scanner.nextLine())
                 .setScale(2, RoundingMode.HALF_EVEN);
+    }
+
+    @Override
+    public Menu menu() {
+        return new ConsoleMenu(bundle);
     }
 
     @Override

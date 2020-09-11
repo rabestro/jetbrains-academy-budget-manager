@@ -2,7 +2,7 @@ package budget.services;
 
 import budget.domain.Account;
 import budget.domain.Purchase;
-import budget.ui.Menu;
+import budget.ui.ConsoleMenu;
 import budget.ui.UI;
 
 import java.math.BigDecimal;
@@ -20,10 +20,10 @@ public class Analyzer extends AccountService implements Runnable {
 
     @Override
     public void run() {
-        new Menu("How do you want to sort?")
+        new ConsoleMenu("How do you want to sort?")
                 .add("Sort all purchases", this::sortAll)
                 .add("Sort by type", this::sortByType)
-                .add("Sort certain type", new Menu("Choose the type of purchase")
+                .add("Sort certain type", new ConsoleMenu("Choose the type of purchase")
                         .add("Food", () -> sortCertainType(Purchase.Category.FOOD))
                         .add("Clothes", () -> sortCertainType(Purchase.Category.CLOTHES))
                         .add("Entertainment", () -> sortCertainType(Purchase.Category.ENTERTAINMENT))

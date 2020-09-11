@@ -2,7 +2,7 @@ package budget.services;
 
 import budget.domain.Account;
 import budget.domain.Purchase;
-import budget.ui.Menu;
+import budget.ui.ConsoleMenu;
 import budget.ui.UI;
 
 import java.math.BigDecimal;
@@ -20,7 +20,7 @@ public class Manager extends AccountService {
 
     public void addIncome() {
         System.out.println("Enter income:");
-        account.addIncome(ui.readNumber());
+        account.addIncome((BigDecimal) ui.readNumber());
     }
 
     public void printBalance() {
@@ -32,13 +32,13 @@ public class Manager extends AccountService {
         System.out.println("Enter purchase name:");
         final var name = ui.readLine();
         System.out.println("Enter its price:");
-        final var price = ui.readNumber();
-        account.addPurchase(new Purchase(category, name, price));
+        final var price = (BigDecimal) ui.readNumber();
+        account.addPurchase(new Purchase(category, name,  price));
         System.out.println("Purchase was added!");
     }
 
-    public Menu getCategoryMenu(final Consumer<Purchase.Category> action, final boolean isAll) {
-        final var menu = new Menu("Choose the type of purchase");
+    public ConsoleMenu getCategoryMenu(final Consumer<Purchase.Category> action, final boolean isAll) {
+        final var menu = new ConsoleMenu("Choose the type of purchase");
         Arrays.stream(Purchase.Category.values())
                 .forEach(category -> menu.add(category.getDescription(), () -> action.accept(category)));
         if (isAll) {

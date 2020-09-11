@@ -2,6 +2,7 @@ package budget.domain;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.MessageFormat;
 import java.util.ResourceBundle;
 
 public class Purchase {
@@ -48,7 +49,7 @@ public class Purchase {
 
     @Override
     public String toString() {
-        return String.format("%s $%s", description, price);
+        return MessageFormat.format("{0} {1,currency}", description, price);
     }
 
     public enum Category {
