@@ -53,17 +53,7 @@ public class Purchase {
     }
 
     public enum Category {
-        FOOD, CLOTHES, ENTERTAINMENT, OTHER;
-        private final String description;
-
-        Category() {
-            description = ResourceBundle.getBundle("categories")
-                    .getString(this.name().toLowerCase());
-        }
-
-        public String getDescription() {
-            return description;
-        }
+        FOOD, CLOTHES, ENTERTAINMENT, OTHER
     }
 
 }
