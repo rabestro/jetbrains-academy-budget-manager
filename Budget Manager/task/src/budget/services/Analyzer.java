@@ -22,7 +22,7 @@ public class Analyzer extends AccountService implements Runnable {
 
     @Override
     public void run() {
-        new LocaleMenu("menu-analyze")
+        ui.menu("menu-analyze")
                 .add("item.all", this::sortAll)
                 .add("item.type", this::sortByType)
                 .add("item.certain", getCategoryMenu(this::sortCertainType).onlyOnce())
