@@ -6,21 +6,22 @@ import java.util.Map;
 
 public class ConsoleMenu implements Menu {
 
-    final Map<String, MenuEntry> menu = new LinkedHashMap<>();
-    final Map<Property, String> properties = new EnumMap<>(Property.class);
+    private final Map<String, MenuEntry> menu = new LinkedHashMap<>();
+    private final Map<Property, String> properties = new EnumMap<>(Property.class);
 
-    UI ui;
-    String format = "{0}) {1}";
-    boolean isOnlyOnce;
-    String error = "Please enter the number from 0 up to {0}";
+    private final UI ui;
+    private boolean isOnlyOnce;
 
     public ConsoleMenu(UI userInterface) {
         ui = userInterface;
+        set(Property.ERROR, "Please enter the number from 0 up to {0}");
+        set(Property.FORMAT, "{0}. {1}");
+        set(Property.EXIT, "Exit");
     }
 
-    public ConsoleMenu(UI userInterface, final String title) {
+    public ConsoleMenu(UI userInterface, String title) {
         this(userInterface);
-        properties.put(Property.TITLE, title);
+        set(Property.TITLE, title);
     }
 
     @Override
@@ -48,7 +49,7 @@ public class ConsoleMenu implements Menu {
 
     @Override
     public Menu addExit() {
-        return add("0", "Exit", this::onlyOnce);
+        return add("0", properties.get(Property.EXIT), this::onlyOnce);
     }
 
     @Override
@@ -61,15 +62,13 @@ public class ConsoleMenu implements Menu {
         do {
             ui.println("");
             ui.println(properties.getOrDefault(Property.TITLE, Property.TITLE.name()));
-            menu.forEach((key, entry) -> ui.println(format, key, entry));
+            menu.forEach((key, entry) -> ui.println(properties.get(Property.FORMAT), key, entry));
             final var key = ui.readLine().toLowerCase();
             ui.println("");
-            menu.getOrDefault(key, new MenuEntry("Error", this::printErrorMessage)).run();
+            menu.getOrDefault(key, new MenuEntry("Error",
+                    () -> ui.println(properties.get(Property.ERROR), menu.size()))
+            ).run();
         } while (!isOnlyOnce);
-    }
-
-    void printErrorMessage() {
-        ui.println(error, menu.size());
     }
 
 }
