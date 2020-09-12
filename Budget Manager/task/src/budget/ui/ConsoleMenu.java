@@ -6,11 +6,11 @@ import java.util.Map;
 public class ConsoleMenu implements Menu {
 
     final Map<String, MenuEntry> menu = new LinkedHashMap<>();
-    private final String errorMessage = "Please enter the number from 0 up to {0}";
+    final String errorMessage = "Please enter the number from 0 up to {0}";
     UI ui;
-    private String title;
-    private String format;
-    private boolean isOnlyOnce;
+    String title;
+    String format;
+    boolean isOnlyOnce;
 
     public ConsoleMenu(UI userInterface) {
         ui = userInterface;

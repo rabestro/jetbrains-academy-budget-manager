@@ -17,12 +17,12 @@ public class LocalUI extends ConsoleUI {
 
     @Override
     public Menu menu() {
-        return new LocalMenu(bundle.getBaseBundleName());
+        return menu(bundle.getBaseBundleName());
     }
 
     @Override
     public Menu menu(String bundle) {
-        return new LocalMenu(bundle);
+        return new LocalMenu(this, bundle);
     }
 
 }
