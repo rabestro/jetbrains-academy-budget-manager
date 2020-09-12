@@ -2,7 +2,6 @@ package budget.services;
 
 import budget.domain.Purchase;
 import budget.repository.FileStorage;
-import budget.ui.LocaleMenu;
 import budget.ui.UI;
 
 import java.math.BigDecimal;
