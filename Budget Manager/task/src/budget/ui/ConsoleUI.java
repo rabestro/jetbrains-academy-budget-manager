@@ -32,11 +32,11 @@ public class ConsoleUI implements UI {
 
     @Override
     public Menu menu() {
-        return null;
+        return new ConsoleMenu(this);
     }
 
     @Override
     public Menu menu(String title) {
-        return null;
+        return new ConsoleMenu(this, title);
     }
 }

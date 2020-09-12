@@ -2,6 +2,7 @@ package budget.services;
 
 import budget.domain.Purchase;
 import budget.repository.FileStorage;
+import budget.ui.Menu;
 import budget.ui.UI;
 
 import java.math.BigDecimal;
@@ -24,7 +25,7 @@ abstract class AccountService {
         ui.println("total", total);
     }
 
-    public UI.Menu getCategoryMenu(final Consumer<Purchase.Category> action) {
+    public Menu getCategoryMenu(final Consumer<Purchase.Category> action) {
         final var menu = ui.menu("menu-purchase");
         for (final var category : Purchase.Category.values()) {
             menu.add(category.name(), () -> action.accept(category));
