@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class ConsoleMenu implements Menu {
 
-    private final Map<String, MenuEntry> menu = new LinkedHashMap<>();
+    final Map<String, MenuEntry> menu = new LinkedHashMap<>();
     private final Map<Property, String> properties = new EnumMap<>(Property.class);
 
     private final UI ui;
@@ -38,7 +38,7 @@ public class ConsoleMenu implements Menu {
 
     @Override
     public Menu add(String description, Runnable action) {
-        return add(String.valueOf(menu.size() + 1), description, action);
+        return this.add(String.valueOf(menu.size() + 1), description, action);
     }
 
     @Override
@@ -49,12 +49,14 @@ public class ConsoleMenu implements Menu {
 
     @Override
     public Menu addExit() {
-        return add("0", properties.get(Property.EXIT), this::onlyOnce);
+        menu.put("0", new MenuEntry(properties.get(Property.EXIT), this::onlyOnce));
+        return this;
     }
 
     @Override
-    public Menu addExit(String description) {
-        return add(String.valueOf(menu.size() + 1), description, this::onlyOnce);
+    public Menu addExit(String key) {
+        menu.put(key, new MenuEntry(properties.get(Property.EXIT), this::onlyOnce));
+        return this;
     }
 
     @Override

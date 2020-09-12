@@ -23,11 +23,7 @@ public class LocalMenu extends ConsoleMenu {
     }
 
     public Menu add(String description, Runnable action) {
-        return super.add(bundle.getString(description), action);
-    }
-
-    public Menu addExit() {
-        return add("0", "menu.exit", this::onlyOnce);
+        return super.add(String.valueOf(menu.size() + 1), bundle.getString(description), action);
     }
 
 }

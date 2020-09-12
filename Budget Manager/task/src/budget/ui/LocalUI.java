@@ -11,8 +11,8 @@ public class LocalUI extends ConsoleUI {
     }
 
     @Override
-    public void println(String pattern, Object... args) {
-        super.println(bundle.getString(pattern), args);
+    public void println(String key, Object... args) {
+        super.println(bundle.containsKey(key) ? bundle.getString(key) : key, args);
     }
 
     @Override

@@ -30,8 +30,7 @@ public class Analyzer extends AccountService implements Runnable {
     }
 
     private void sortCertainType(Purchase.Category category) {
-        System.out.println(category.name() + ":");
-        ui.println(category.name());
+        ui.println(category.name(), ":");
         db.getAccount().getHistory()
                 .stream()
                 .filter(purchase -> purchase.getCategory() == category)
@@ -43,7 +42,7 @@ public class Analyzer extends AccountService implements Runnable {
     }
 
     private void sortAll() {
-        if (db.getAccount().getHistory().size() == 0) {
+        if (db.getAccount().getHistory().isEmpty()) {
             printEmpty();
             return;
         }
@@ -66,7 +65,7 @@ public class Analyzer extends AccountService implements Runnable {
                 .stream()
                 .sorted(reverseOrder(comparingByValue(BigDecimal::compareTo)))
                 .collect(toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e2, LinkedHashMap::new))
-                .forEach((category, total) -> ui.println("categoryTotal", capitalize(category.name()), total));
+                .forEach((category, total) -> ui.println(category.name(), " - ", total));
 
         final var total = db.getAccount().getHistory().stream()
                 .map(Purchase::getPrice)
