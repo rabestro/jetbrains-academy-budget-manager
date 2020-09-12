@@ -9,7 +9,7 @@ public class ConsoleMenu implements Menu {
     final String errorMessage = "Please enter the number from 0 up to {0}";
     UI ui;
     String title;
-    String format;
+    String format = "{0}) {1}";
     boolean isOnlyOnce;
 
     public ConsoleMenu(UI userInterface) {
@@ -19,6 +19,18 @@ public class ConsoleMenu implements Menu {
     public ConsoleMenu(UI userInterface, final String title) {
         this(userInterface);
         this.title = title;
+    }
+
+    @Override
+    public Menu title(String title) {
+        this.title = title;
+        return this;
+    }
+
+    @Override
+    public Menu format(String format) {
+        this.format = format;
+        return this;
     }
 
     @Override
