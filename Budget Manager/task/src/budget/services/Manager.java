@@ -2,6 +2,7 @@ package budget.services;
 
 import budget.domain.Purchase;
 import budget.repository.FileStorage;
+import budget.ui.Menu;
 import budget.ui.UI;
 
 import java.math.BigDecimal;
@@ -34,7 +35,7 @@ public class Manager extends AccountService {
         System.out.println("purchaseAdded");
     }
 
-    public UI.Menu getPurchaseMenu() {
+    public Menu getPurchaseMenu() {
         final var menu = getCategoryMenu(this::addPurchase);
         return menu.add("menu.exit", menu::onlyOnce);
     }

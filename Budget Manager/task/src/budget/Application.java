@@ -3,13 +3,13 @@ package budget;
 import budget.repository.FileStorage;
 import budget.services.Analyzer;
 import budget.services.Manager;
-import budget.ui.LocaleUI;
+import budget.ui.LocalUI;
 
 public class Application implements Runnable {
     private final FileStorage repository;
-    private final LocaleUI ui;
+    private final LocalUI ui;
 
-    public Application(final FileStorage repository, final LocaleUI userInterface) {
+    public Application(final FileStorage repository, final LocalUI userInterface) {
         this.repository = repository;
         ui = userInterface;
     }
