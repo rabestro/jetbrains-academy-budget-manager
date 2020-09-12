@@ -18,7 +18,7 @@ public class Application implements Runnable {
     public void run() {
         final var manager = new Manager(repository, ui);
 
-        ui.menu("main-menu")
+        ui.menu("menu-main")
                 .add("item.addIncome", manager::addIncome)
                 .add("item.addPurchase", manager.getPurchaseMenu())
                 .add("item.purchases", manager::showPurchases)
