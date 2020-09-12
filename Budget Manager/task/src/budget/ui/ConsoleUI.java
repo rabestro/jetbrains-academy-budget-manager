@@ -11,10 +11,6 @@ public class ConsoleUI implements UI {
         this.scanner = new Scanner(System.in);
     }
 
-    public ConsoleUI(Scanner scanner) {
-        this.scanner = scanner;
-    }
-
     @Override
     public void println(String pattern, Object... args) {
         System.out.println(MessageFormat.format(pattern, args));
