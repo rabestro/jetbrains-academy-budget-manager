@@ -1,16 +1,18 @@
 package budget.ui;
 
+import java.util.EnumMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class ConsoleMenu implements Menu {
 
     final Map<String, MenuEntry> menu = new LinkedHashMap<>();
-    final String errorMessage = "Please enter the number from 0 up to {0}";
+    final Map<Property, String> properties = new EnumMap<>(Property.class);
+
     UI ui;
-    String title;
     String format = "{0}) {1}";
     boolean isOnlyOnce;
+    String error = "Please enter the number from 0 up to {0}";
 
     public ConsoleMenu(UI userInterface) {
         ui = userInterface;
@@ -18,18 +20,12 @@ public class ConsoleMenu implements Menu {
 
     public ConsoleMenu(UI userInterface, final String title) {
         this(userInterface);
-        this.title = title;
+        properties.put(Property.TITLE, title);
     }
 
     @Override
-    public Menu title(String title) {
-        this.title = title;
-        return this;
-    }
-
-    @Override
-    public Menu format(String format) {
-        this.format = format;
+    public Menu set(Property key, String value) {
+        properties.put(key, value);
         return this;
     }
 
@@ -64,7 +60,7 @@ public class ConsoleMenu implements Menu {
     public void run() {
         do {
             ui.println("");
-            ui.println(title);
+            ui.println(properties.getOrDefault(Property.TITLE, Property.TITLE.name()));
             menu.forEach((key, entry) -> ui.println(format, key, entry));
             final var key = ui.readLine().toLowerCase();
             ui.println("");
@@ -73,7 +69,7 @@ public class ConsoleMenu implements Menu {
     }
 
     void printErrorMessage() {
-        ui.println(errorMessage, menu.size());
+        ui.println(error, menu.size());
     }
 
 }

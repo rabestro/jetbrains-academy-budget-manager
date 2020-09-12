@@ -9,8 +9,13 @@ public class LocalMenu extends ConsoleMenu {
     public LocalMenu(UI ui, final String bundleName) {
         super(ui);
         bundle = ResourceBundle.getBundle(bundleName);
-        title = bundle.getString("menu.title");
-        format = bundle.getString("menu.format");
+
+        for (var property : Property.values()) {
+            var key = "menu." + property.name().toLowerCase();
+            if (bundle.containsKey(key)) {
+                properties.put(property, bundle.getString(key));
+            }
+        }
     }
 
     public Menu add(final String key, final String description, final Runnable action) {

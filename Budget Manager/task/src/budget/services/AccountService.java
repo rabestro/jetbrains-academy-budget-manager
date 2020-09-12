@@ -5,7 +5,6 @@ import budget.repository.FileStorage;
 import budget.ui.Menu;
 import budget.ui.UI;
 
-import java.math.BigDecimal;
 import java.util.function.Consumer;
 
 abstract class AccountService {
@@ -21,7 +20,7 @@ abstract class AccountService {
         ui.println("emptyList");
     }
 
-    void printTotal(final BigDecimal total) {
+    void printTotal(final Number total) {
         ui.println("total", total);
     }
 
