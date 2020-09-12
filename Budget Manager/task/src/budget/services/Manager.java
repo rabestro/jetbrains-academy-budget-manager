@@ -26,12 +26,12 @@ public class Manager extends AccountService {
 
 
     public void addPurchase(final Purchase.Category category) {
-        System.out.println("Enter purchase name:");
+        ui.println("purchaseName");
         final var name = ui.readLine();
-        System.out.println("Enter its price:");
+        ui.println("purchasePrice");
         final var price = (BigDecimal) ui.readNumber();
         db.getAccount().addPurchase(new Purchase(category, name, price));
-        System.out.println("Purchase was added!");
+        System.out.println("purchaseAdded");
     }
 
     public UI.Menu getPurchaseMenu() {
