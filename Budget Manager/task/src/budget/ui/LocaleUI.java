@@ -6,11 +6,11 @@ import java.text.MessageFormat;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
-public class ConsoleUI implements UI {
+public class LocaleUI implements UI {
     private static final Scanner scanner = new Scanner(System.in);
     private final ResourceBundle bundle;
 
-    public ConsoleUI(ResourceBundle bundle) {
+    public LocaleUI(ResourceBundle bundle) {
         this.bundle = bundle;
     }
 
@@ -27,12 +27,12 @@ public class ConsoleUI implements UI {
 
     @Override
     public Menu menu() {
-        return new ConsoleMenu(bundle.getBaseBundleName());
+        return new LocaleMenu(bundle.getBaseBundleName());
     }
 
     @Override
     public Menu menu(String bundle) {
-        return new ConsoleMenu(bundle);
+        return new LocaleMenu(bundle);
     }
 
     @Override

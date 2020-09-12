@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
-public class ConsoleMenu implements UI.Menu {
+public class LocaleMenu implements UI.Menu {
     private static final Scanner scanner = new Scanner(System.in);
 
     private final Map<String, Entry> map = new LinkedHashMap<>();
@@ -16,31 +16,31 @@ public class ConsoleMenu implements UI.Menu {
     private final String format;
     private boolean once;
 
-    public ConsoleMenu(final String bundleName) {
+    public LocaleMenu(final String bundleName) {
         this.bundle = ResourceBundle.getBundle(bundleName);
         this.title = bundle.getString("menu.title");
         this.format = bundle.getString("menu.format");
     }
 
-    public ConsoleMenu onlyOnce() {
+    public LocaleMenu onlyOnce() {
         once = true;
         return this;
     }
 
-    public ConsoleMenu add(final String key, final String description, final Runnable action) {
+    public LocaleMenu add(final String key, final String description, final Runnable action) {
         map.put(key, new Entry(bundle.getString(description), action));
         return this;
     }
 
-    public ConsoleMenu add(final String description, final Runnable action) {
+    public LocaleMenu add(final String description, final Runnable action) {
         return add(String.valueOf(map.size() + 1), description, action);
     }
 
-    public ConsoleMenu addExit() {
+    public LocaleMenu addExit() {
         return add("0", "menu.exit", this::onlyOnce);
     }
 
-    public ConsoleMenu addExit(final String key) {
+    public LocaleMenu addExit(final String key) {
         return add(key, "menu.exit", this::onlyOnce);
     }
 

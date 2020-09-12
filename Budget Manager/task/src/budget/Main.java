@@ -1,7 +1,7 @@
 package budget;
 
 import budget.repository.FileJackson;
-import budget.ui.ConsoleUI;
+import budget.ui.LocaleUI;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 
 import java.util.ResourceBundle;
@@ -11,7 +11,7 @@ public class Main {
 
         new Application(
                 new FileJackson(new YAMLMapper()),
-                new ConsoleUI(ResourceBundle.getBundle("application"))
+                new LocaleUI(ResourceBundle.getBundle("application"))
         ).run();
     }
 }

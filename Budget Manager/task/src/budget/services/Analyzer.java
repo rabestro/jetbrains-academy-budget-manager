@@ -2,7 +2,7 @@ package budget.services;
 
 import budget.domain.Purchase;
 import budget.repository.FileStorage;
-import budget.ui.ConsoleMenu;
+import budget.ui.LocaleMenu;
 import budget.ui.UI;
 
 import java.math.BigDecimal;
@@ -22,7 +22,7 @@ public class Analyzer extends AccountService implements Runnable {
 
     @Override
     public void run() {
-        new ConsoleMenu("menu-analyze")
+        new LocaleMenu("menu-analyze")
                 .add("item.all", this::sortAll)
                 .add("item.type", this::sortByType)
                 .add("item.certain", getCategoryMenu(this::sortCertainType).onlyOnce())
