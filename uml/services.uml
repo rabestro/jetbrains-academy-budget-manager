@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>budget.services</OriginalElement>
+  <nodes>
+    <node x="0.0" y="241.5">budget.services.Analyzer</node>
+    <node x="284.0" y="229.0">budget.services.Manager</node>
+    <node x="86.75" y="0.0">budget.services.AccountService</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="budget.services.Manager" target="budget.services.AccountService">
+      <point x="0.0" y="-101.5" />
+      <point x="414.5" y="204.0" />
+      <point x="366.5" y="204.0" />
+      <point x="93.25" y="89.5" />
+    </edge>
+    <edge source="budget.services.Analyzer" target="budget.services.AccountService">
+      <point x="0.0" y="-89.0" />
+      <point x="132.0" y="204.0" />
+      <point x="180.0" y="204.0" />
+      <point x="-93.25" y="89.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="272.5" y="216.0" />
+  <SelectedNodes>
+    <node>budget.services.AccountService</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+    <Category>Methods</Category>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
