@@ -20,3 +20,6 @@ You will create a very applicable product, and in the meanwhile also get acquain
 
 ![Packgage budget.services](uml/services.png)
 
+### Package budget.ui
+
+![Package budget.ui](uml/ui.png)

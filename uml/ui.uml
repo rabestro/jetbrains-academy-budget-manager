@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>budget.ui</OriginalElement>
+  <nodes>
+    <node x="136.0" y="0.0">budget.ui.Menu</node>
+    <node x="569.0" y="456.0">budget.ui.LocalUI</node>
+    <node x="569.0" y="203.0">budget.ui.ConsoleUI</node>
+    <node x="569.0" y="0.0">budget.ui.UI</node>
+    <node x="0.0" y="624.0">budget.ui.LocalMenu</node>
+    <node x="310.0" y="311.5">budget.ui.Menu.Property</node>
+    <node x="0.0" y="800.0">budget.ui.MenuEntry</node>
+    <node x="0.0" y="227.0">budget.ui.ConsoleMenu</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="budget.ui.ConsoleMenu" target="budget.ui.Menu">
+      <point x="0.0" y="-173.5" />
+      <point x="145.0" y="202.0" />
+      <point x="208.5" y="202.0" />
+      <point x="-72.5" y="88.5" />
+    </edge>
+    <edge source="budget.ui.LocalMenu" target="budget.ui.ConsoleMenu">
+      <point x="0.0" y="-65.5" />
+      <point x="0.0" y="173.5" />
+    </edge>
+    <edge source="budget.ui.ConsoleUI" target="budget.ui.UI">
+      <point x="0.0" y="-101.5" />
+      <point x="0.0" y="76.5" />
+    </edge>
+    <edge source="budget.ui.Menu.Property" target="budget.ui.Menu">
+      <point x="0.0" y="-89.0" />
+      <point x="417.0" y="202.0" />
+      <point x="353.5" y="202.0" />
+      <point x="72.5" y="88.5" />
+    </edge>
+    <edge source="budget.ui.LocalUI" target="budget.ui.ConsoleUI">
+      <point x="0.0" y="-77.5" />
+      <point x="0.0" y="101.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="290.5" y="412.5" />
+  <SelectedNodes>
+    <node>budget.ui.ConsoleMenu</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Inner Classes</Category>
+    <Category>Fields</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
