@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>budget</OriginalElement>
+  <nodes>
+    <node x="159.94444444444446" y="266.78389485677087">budget.services</node>
+    <node x="275.94444444444446" y="135.78389485677087">budget.repository</node>
+    <node x="127.71006944444449" y="367.78389485677087">budget.Application</node>
+    <node x="176.71006944444449" y="596.7838948567709">budget.Main</node>
+    <node x="212.4826388888889" y="14.783894856770871">budget.domain</node>
+    <node x="50.0" y="135.78389485677087">budget.ui</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="budget.domain" target="budget.domain">
+      <point x="-27.0" y="15.5" />
+      <point x="257.4826388888889" y="85.78389485677087" />
+      <point x="172.4826388888889" y="85.78389485677087" />
+      <point x="172.4826388888889" y="19.9505615234375" />
+      <point x="-72.0" y="-10.333333333333371" />
+    </edge>
+    <edge source="budget.ui" target="budget.ui">
+      <point x="-12.444444444444457" y="15.5" />
+      <point x="93.55555555555554" y="216.78389485677087" />
+      <point x="0.0" y="216.78389485677087" />
+      <point x="0.0" y="139.65889485677087" />
+      <point x="-56.0" y="-11.625" />
+    </edge>
+    <edge source="budget.services" target="budget.domain">
+      <point x="-13.333333333333343" y="-15.5" />
+      <point x="226.61111111111111" y="246.78389485677087" />
+      <point x="234.44444444444446" y="246.78389485677087" />
+      <point x="234.44444444444446" y="105.78389485677087" />
+      <point x="275.4826388888889" y="105.78389485677087" />
+      <point x="-9.0" y="15.5" />
+    </edge>
+    <edge source="budget.repository" target="budget.domain">
+      <point x="-58.66666666666663" y="-15.5" />
+      <point x="305.2777777777778" y="115.78389485677087" />
+      <point x="311.4826388888889" y="115.78389485677087" />
+      <point x="27.0" y="15.5" />
+    </edge>
+    <edge source="budget.Application" target="budget.repository">
+      <point x="115.0" y="-89.5" />
+      <point x="380.71006944444446" y="347.78389485677087" />
+      <point x="397.1423611111111" y="347.78389485677087" />
+      <point x="397.1423611111111" y="246.78389485677087" />
+      <point x="407.94444444444446" y="246.78389485677087" />
+      <point x="44.000000000000014" y="15.5" />
+    </edge>
+    <edge source="budget.Main" target="budget.Application">
+      <point x="0.0" y="-28.5" />
+      <point x="0.0" y="89.5" />
+    </edge>
+    <edge source="budget.services" target="budget.repository">
+      <point x="40.0" y="-15.5" />
+      <point x="279.94444444444446" y="236.78389485677087" />
+      <point x="319.94444444444446" y="236.78389485677087" />
+      <point x="-44.0" y="15.5" />
+    </edge>
+    <edge source="budget.repository" target="budget.repository">
+      <point x="-73.33333333333333" y="15.5" />
+      <point x="290.6111111111111" y="186.78389485677087" />
+      <point x="255.94444444444446" y="186.78389485677087" />
+      <point x="255.94444444444446" y="151.28389485677087" />
+      <point x="-88.0" y="-0.0" />
+    </edge>
+    <edge source="budget.Application" target="budget.ui">
+      <point x="-69.0" y="-89.5" />
+      <point x="196.71006944444449" y="337.78389485677087" />
+      <point x="129.44444444444446" y="337.78389485677087" />
+      <point x="129.44444444444446" y="246.78389485677087" />
+      <point x="130.88888888888889" y="246.78389485677087" />
+      <point x="24.888888888888886" y="15.5" />
+    </edge>
+    <edge source="budget.services" target="budget.ui">
+      <point x="-66.66666666666669" y="-15.5" />
+      <point x="173.27777777777777" y="246.78389485677087" />
+      <point x="143.33333333333331" y="246.78389485677087" />
+      <point x="37.333333333333314" y="15.5" />
+    </edge>
+    <edge source="budget.Main" target="budget.repository">
+      <point x="59.333333333333314" y="-28.5" />
+      <point x="325.0434027777778" y="571.7838948567709" />
+      <point x="421.19444444444446" y="571.7838948567709" />
+      <point x="421.19444444444446" y="246.78389485677087" />
+      <point x="437.27777777777777" y="246.78389485677087" />
+      <point x="73.33333333333333" y="15.5" />
+    </edge>
+    <edge source="budget.services" target="budget.services">
+      <point x="-53.33333333333334" y="15.5" />
+      <point x="186.61111111111111" y="317.78389485677087" />
+      <point x="139.94444444444446" y="317.78389485677087" />
+      <point x="139.94444444444446" y="282.28389485677087" />
+      <point x="-80.0" y="-0.0" />
+    </edge>
+    <edge source="budget.Application" target="budget.services">
+      <point x="-23.0" y="-89.5" />
+      <point x="242.71006944444449" y="347.78389485677087" />
+      <point x="239.94444444444446" y="347.78389485677087" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="budget.Main" target="budget.ui">
+      <point x="-59.33333333333334" y="-28.5" />
+      <point x="206.37673611111114" y="571.7838948567709" />
+      <point x="102.39930555555554" y="571.7838948567709" />
+      <point x="102.39930555555554" y="246.78389485677087" />
+      <point x="106.0" y="246.78389485677087" />
+      <point x="0.0" y="15.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="146.5" y="241.5" />
+  <SelectedNodes>
+    <node>budget.services</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Inner Classes</Category>
+    <Category>Properties</Category>
+    <Category>Methods</Category>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
