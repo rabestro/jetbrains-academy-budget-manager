@@ -5,3 +5,18 @@ Not to sound overly serious, but it’s very important to manage your budget. Th
 ## Learning outcomes
 
 You will create a very applicable product, and in the meanwhile also get acquainted with the basic concepts of programming in Java. You will deal with the widest variety of tools: work with strings, perform mathematical calculations and sort the data.
+
+## UML Diagrams
+
+### Package budget.domain
+
+![Package budget.domain](uml/domain.png)
+
+### Package budget.repository
+
+![Package budget.repository](uml/repository.png)
+
+### Packgage budget.services
+
+![Packgage budget.services](uml/services.png)
+

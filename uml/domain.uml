@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>budget.domain</OriginalElement>
+  <nodes>
+    <node x="0.0" y="228.0">budget.domain.Purchase</node>
+    <node x="52.5" y="0.0">budget.domain.Purchase.Category</node>
+    <node x="37.5" y="457.0">budget.domain.Account</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="budget.domain.Account" target="budget.domain.Purchase">
+      <point x="61.5" y="-77.5" />
+      <point x="222.0" y="432.0" />
+      <point x="240.75" y="432.0" />
+      <point x="80.25" y="89.5" />
+    </edge>
+    <edge source="budget.domain.Purchase" target="budget.domain.Purchase.Category">
+      <point x="-107.0" y="-89.5" />
+      <point x="53.5" y="203.0" />
+      <point x="88.5" y="203.0" />
+      <point x="-72.0" y="89.0" />
+    </edge>
+    <edge source="budget.domain.Purchase.Category" target="budget.domain.Purchase">
+      <point x="72.0" y="89.0" />
+      <point x="232.5" y="203.0" />
+      <point x="267.5" y="203.0" />
+      <point x="107.0" y="-89.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="133.5" y="279.5" />
+  <SelectedNodes>
+    <node>budget.domain.Purchase</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Inner Classes</Category>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
