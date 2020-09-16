@@ -1,17 +1,13 @@
 package budget;
 
-import budget.repository.FileJackson;
-import budget.ui.LocalUI;
-import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.util.ResourceBundle;
-
+@SpringBootApplication
 public class Main {
-    public static void main(String[] args) throws Exception {
 
-        new Application(
-                new FileJackson(new YAMLMapper()),
-                new LocalUI(ResourceBundle.getBundle("messages"))
-        ).run();
+    public static void main(String[] args) {
+        SpringApplication.run(SpringApp.class, args);
     }
+
 }

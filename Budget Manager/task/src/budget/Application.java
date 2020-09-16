@@ -4,9 +4,12 @@ import budget.repository.FileStorage;
 import budget.services.Analyzer;
 import budget.services.Manager;
 import budget.ui.UI;
-import org.springframework.boot.CommandLineRunner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class Application implements CommandLineRunner {
+public class Application {
+    private static final Logger LOG = LoggerFactory.getLogger(SpringApp.class);
+
     private final FileStorage repository;
     private final UI ui;
 
@@ -25,8 +28,7 @@ public class Application implements CommandLineRunner {
         ui.println(repository.load() ? "loaded" : "error.load", FileStorage.DATABASE.getAbsolutePath());
     }
 
-    @Override
-    public void run(String... args) throws Exception {
+    public void run() {
         final Manager manager = new Manager(repository, ui);
 
         ui.menu("menu-main")
