@@ -5,6 +5,11 @@ import java.util.ResourceBundle;
 public class LocalUI extends ConsoleUI {
     private final ResourceBundle bundle;
 
+    public LocalUI(String bundleName) {
+        super();
+        this.bundle = ResourceBundle.getBundle(bundleName);
+    }
+
     public LocalUI(ResourceBundle bundle) {
         super();
         this.bundle = bundle;

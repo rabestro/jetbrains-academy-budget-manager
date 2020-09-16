@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="objectMapper" class="com.fasterxml.jackson.dataformat.yaml.YAMLMapper"/>
+
+    <bean id="repository" class="budget.repository.FileJackson">
+        <constructor-arg ref="objectMapper"/>
+    </bean>
+
+    <bean id="appMenu" class="budget.ui.LocalUI">
+        <constructor-arg value="messages"/>
+    </bean>
+
+    <bean id="app" class="budget.Application">
+        <constructor-arg ref="repository"/>
+        <constructor-arg ref="appMenu"/>
+    </bean>
+</beans>

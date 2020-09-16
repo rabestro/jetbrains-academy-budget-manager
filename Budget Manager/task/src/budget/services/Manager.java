@@ -9,7 +9,6 @@ import java.math.BigDecimal;
 
 import static java.util.Objects.isNull;
 
-
 public class Manager extends AccountService {
 
     public Manager(FileStorage repository, UI userInterface) {

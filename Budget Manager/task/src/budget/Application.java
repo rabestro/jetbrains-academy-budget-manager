@@ -3,20 +3,31 @@ package budget;
 import budget.repository.FileStorage;
 import budget.services.Analyzer;
 import budget.services.Manager;
-import budget.ui.LocalUI;
+import budget.ui.UI;
+import org.springframework.boot.CommandLineRunner;
 
-public class Application implements Runnable {
+public class Application implements CommandLineRunner {
     private final FileStorage repository;
-    private final LocalUI ui;
+    private final UI ui;
 
-    public Application(final FileStorage repository, final LocalUI userInterface) {
+    public Application(
+            final FileStorage repository,
+            final UI userInterface) {
         this.repository = repository;
         ui = userInterface;
     }
 
+    private void save() {
+        ui.println(repository.save() ? "saved" : "error.save", FileStorage.DATABASE.getAbsolutePath());
+    }
+
+    private void load() {
+        ui.println(repository.load() ? "loaded" : "error.load", FileStorage.DATABASE.getAbsolutePath());
+    }
+
     @Override
-    public void run() {
-        final var manager = new Manager(repository, ui);
+    public void run(String... args) throws Exception {
+        final Manager manager = new Manager(repository, ui);
 
         ui.menu("menu-main")
                 .add("item.addIncome", manager::addIncome)
@@ -30,13 +41,5 @@ public class Application implements Runnable {
                 .run();
 
         ui.println("bye");
-    }
-
-    private void save() {
-        ui.println(repository.save() ? "saved" : "error.save", FileStorage.DATABASE.getAbsolutePath());
-    }
-
-    private void load() {
-        ui.println(repository.load() ? "loaded" : "error.load", FileStorage.DATABASE.getAbsolutePath());
     }
 }

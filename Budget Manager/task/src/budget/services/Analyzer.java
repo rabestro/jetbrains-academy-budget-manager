@@ -15,7 +15,9 @@ import static java.util.stream.Collectors.*;
 
 public class Analyzer extends AccountService implements Runnable {
 
-    public Analyzer(FileStorage repository, UI userInterface) {
+    public Analyzer(
+            final FileStorage repository,
+            final UI userInterface) {
         super(repository, userInterface);
     }
 

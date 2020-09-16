@@ -14,59 +14,6 @@ public class BudgetManagerTest extends StageTest<String> {
         super(Main.class);
     }
 
-    @Override
-    public List<TestCase<String>> generate() {
-        return List.of(
-
-                new TestCase<String>()
-                        .setInput("0\n")
-                        .setCheckFunc(BudgetManagerTest::test1),
-
-                new TestCase<String>()
-                        .setInput("0\n")
-                        .setCheckFunc(BudgetManagerTest::test2),
-
-                new TestCase<String>()
-                        .setInput("4\n0")
-                        .setCheckFunc(BudgetManagerTest::test3),
-
-                new TestCase<String>()
-                        .setInput("1\n400\n4\n1\n200\n4\n0")
-                        .setCheckFunc(BudgetManagerTest::test4),
-
-                new TestCase<String>()
-                        .setInput("1\n1000\n2\n" +
-                                "1\nAlmond 250g\n35.43\n" +
-                                "1\nMilk\n3.50\n" +
-                                "1\nRed Fuji Apple\n5.99\n" +
-                                "1\nEggs\n3.99\n" +
-                                "1\nFIJI Natural Artesian Water\n25.98\n" +
-                                "1\nHershey's milk chocolate bars\n8.54\n" +
-                                "1\nGreat Value Broccoli Florets\n1.00\n" +
-                                "1\nKeystone Ground Bee\n6.28\n" +
-                                "2\nGildan LT\n8.61\n" +
-                                "2\nMen's Dual Defense Crew Socks 12 Pairs\n13.00\n" +
-                                "2\nWrangler Men's Stretch Cargo Pant\n19.97\n" +
-                                "3\nLEGO DUPLO Town Farm Animals\n10.10\n" +
-                                "3\nCinema\n8.73\n" +
-                                "3\nSkate rental\n30\n" +
-                                "4\nSensodyne Pronamel Toothpaste\n19.74\n" +
-                                "4\nChick-fil-A $10 Gift Card\n10\n" +
-                                "4\nDebt\n3.50\n" +
-                                "5\n5\n0")
-                        .setCheckFunc(BudgetManagerTest::test5),
-
-                new TestCase<String>()
-                        .setInput("6\n4\n3\n5\n1\n6\n0")
-                        .setCheckFunc(BudgetManagerTest::test6),
-
-                new TestCase<String>()
-                        .setInput("7\n1\n2\n3\n4\n4\n6\n7\n1\n2\n3\n1\n4\n0")
-                        .setCheckFunc(BudgetManagerTest::test7)
-        );
-    }
-
-
     //Checking program stop
     private static CheckResult test1(String reply, String attach) {
         if (!reply.contains("Bye!")) {
@@ -75,7 +22,6 @@ public class BudgetManagerTest extends StageTest<String> {
         }
         return new CheckResult(true);
     }
-
 
     //Checking menu
     private static CheckResult test2(String reply, String attach) {
@@ -88,7 +34,6 @@ public class BudgetManagerTest extends StageTest<String> {
         }
         return new CheckResult(true);
     }
-
 
     //Checking balance
     private static CheckResult test3(String reply, String attach) {
@@ -127,7 +72,6 @@ public class BudgetManagerTest extends StageTest<String> {
 
         return new CheckResult(true);
     }
-
 
     //Checking adding income
     private static CheckResult test4(String reply, String attach) {
@@ -284,7 +228,6 @@ public class BudgetManagerTest extends StageTest<String> {
         return new CheckResult(true);
     }
 
-
     //Sorting check
     private static CheckResult test7(String reply, String attach) {
 
@@ -386,5 +329,57 @@ public class BudgetManagerTest extends StageTest<String> {
         }
 
         return new CheckResult(true);
+    }
+
+    @Override
+    public List<TestCase<String>> generate() {
+        return List.of(
+
+                new TestCase<String>()
+                        .setInput("0\n")
+                        .setCheckFunc(BudgetManagerTest::test1),
+
+                new TestCase<String>()
+                        .setInput("0\n")
+                        .setCheckFunc(BudgetManagerTest::test2),
+
+                new TestCase<String>()
+                        .setInput("4\n0")
+                        .setCheckFunc(BudgetManagerTest::test3),
+
+                new TestCase<String>()
+                        .setInput("1\n400\n4\n1\n200\n4\n0")
+                        .setCheckFunc(BudgetManagerTest::test4),
+
+                new TestCase<String>()
+                        .setInput("1\n1000\n2\n" +
+                                "1\nAlmond 250g\n35.43\n" +
+                                "1\nMilk\n3.50\n" +
+                                "1\nRed Fuji Apple\n5.99\n" +
+                                "1\nEggs\n3.99\n" +
+                                "1\nFIJI Natural Artesian Water\n25.98\n" +
+                                "1\nHershey's milk chocolate bars\n8.54\n" +
+                                "1\nGreat Value Broccoli Florets\n1.00\n" +
+                                "1\nKeystone Ground Bee\n6.28\n" +
+                                "2\nGildan LT\n8.61\n" +
+                                "2\nMen's Dual Defense Crew Socks 12 Pairs\n13.00\n" +
+                                "2\nWrangler Men's Stretch Cargo Pant\n19.97\n" +
+                                "3\nLEGO DUPLO Town Farm Animals\n10.10\n" +
+                                "3\nCinema\n8.73\n" +
+                                "3\nSkate rental\n30\n" +
+                                "4\nSensodyne Pronamel Toothpaste\n19.74\n" +
+                                "4\nChick-fil-A $10 Gift Card\n10\n" +
+                                "4\nDebt\n3.50\n" +
+                                "5\n5\n0")
+                        .setCheckFunc(BudgetManagerTest::test5),
+
+                new TestCase<String>()
+                        .setInput("6\n4\n3\n5\n1\n6\n0")
+                        .setCheckFunc(BudgetManagerTest::test6),
+
+                new TestCase<String>()
+                        .setInput("7\n1\n2\n3\n4\n4\n6\n7\n1\n2\n3\n1\n4\n0")
+                        .setCheckFunc(BudgetManagerTest::test7)
+        );
     }
 }
